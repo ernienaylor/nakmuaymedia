@@ -1,8 +1,24 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from "next/link"
+
+// This is a simple 404 page that redirects to our custom not-found page
+export default function Custom404() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to our custom not-found page
+    router.replace('/not-found');
+  }, [router]);
+
+  // This is just a placeholder - it should never be rendered
+  // The useEffect will redirect to /not-found before this is rendered
+  return null;
+}
 
 // A completely standalone 404 page that doesn't use any components
 // that might depend on the theme context
-export default function Custom404() {
+export function Custom404Standalone() {
   return (
     <div style={{ 
       minHeight: "100vh", 
