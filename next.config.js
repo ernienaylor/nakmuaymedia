@@ -74,12 +74,24 @@ const nextConfig = {
   },
   // Configure rewrites if needed
   async rewrites() {
-    return [];
+    return [
+      // Rewrite the /_not-found route to our custom not-found page
+      {
+        source: '/_not-found',
+        destination: '/not-found',
+      },
+    ];
   },
   // Disable static generation for specific pages
   output: 'standalone',
   // Configure which pages should not be statically generated
-  unstable_excludeFiles: ['**/not-found.js', '**/not-found.js.map', '**/404.js', '**/404.js.map'],
+  unstable_excludeFiles: [
+    '**/not-found.js', 
+    '**/not-found.js.map', 
+    '**/404.js', 
+    '**/404.js.map',
+    '**/not-found/**',
+  ],
 };
 
 // Add bundle analyzer in analyze mode

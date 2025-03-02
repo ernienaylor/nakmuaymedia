@@ -5,8 +5,8 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   // Check if the request is for the not-found page
   if (request.nextUrl.pathname === '/_not-found') {
-    // Redirect to the custom 404 page
-    return NextResponse.redirect(new URL('/404', request.url));
+    // Redirect to our custom not-found page
+    return NextResponse.redirect(new URL('/not-found', request.url));
   }
 
   // Continue with the request

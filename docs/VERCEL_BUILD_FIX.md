@@ -14,7 +14,7 @@ This error occurred because the static generation process was trying to render c
 
 We implemented a comprehensive approach to fix the issue:
 
-1. **Created a completely standalone not-found page**: We updated the `src/app/not-found.tsx` file to use a completely standalone layout that doesn't import any components that might depend on the theme context. We removed the "use client" directive to make it a server component.
+1. **Created a completely separate not-found page**: We created a new not-found page in `/src/app/not-found/` with its own layout that doesn't use the theme context. This ensures that the page is completely isolated from the theme context.
 
 2. **Updated the 404 page in the pages directory**: We also updated the `src/pages/404.tsx` file to use the same standalone approach, ensuring that it doesn't depend on any components that might use the theme context.
 
@@ -33,61 +33,135 @@ We implemented a comprehensive approach to fix the issue:
 
 ### Next.js Configuration
 
-We updated the `next.config.js` file to disable static generation for the not-found page:
+We updated the `next.config.js` file to disable static generation for the not-found page and to rewrite the `/_not-found` route to our custom not-found page:
 
 ```js
 // next.config.js
 const nextConfig = {
   // ... other configuration
   
+  // Configure rewrites if needed
+  async rewrites() {
+    return [
+      // Rewrite the /_not-found route to our custom not-found page
+      {
+        source: '/_not-found',
+        destination: '/not-found',
+      },
+    ];
+  },
+  
   // Disable static generation for specific pages
   output: 'standalone',
   // Configure which pages should not be statically generated
-  unstable_excludeFiles: ['**/not-found.js', '**/not-found.js.map', '**/404.js', '**/404.js.map'],
+  unstable_excludeFiles: [
+    '**/not-found.js', 
+    '**/not-found.js.map', 
+    '**/404.js', 
+    '**/404.js.map',
+    '**/not-found/**',
+  ],
 };
 ```
 
-### Not Found Page Configuration
+### Not Found Page Layout
 
-We created special configuration files for the not-found page:
+We created a special layout for the not-found page that doesn't use the theme context:
 
-```js
-// src/app/not-found.config.js
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
-export const runtime = 'nodejs';
-export const preferredRegion = 'auto';
+```tsx
+// src/app/not-found/layout.tsx
+// This is a server component - no "use client" directive
+import type { Metadata } from "next";
+import { Montserrat, Roboto } from "next/font/google";
+import "../globals.css";
+import "../fix.css";
+
+// Define fonts with proper weights and subsets
+const montserrat = Montserrat({ 
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const roboto = Roboto({ 
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "404 - Page Not Found | Nak Muay Media",
+  description: "The page you are looking for doesn't exist or has been moved.",
+};
+
+// These exports ensure this page is not statically generated
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
+
+export default function NotFoundLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      </head>
+      <body className={`${montserrat.variable} ${roboto.variable} font-body antialiased min-h-screen bg-background text-foreground`}>
+        {children}
+      </body>
+    </html>
+  );
+}
 ```
 
-### Route Handler
+### Not Found Page
 
-We created a special route handler for the not-found page:
+We created a special not-found page that doesn't use the theme context:
 
-```js
-// src/app/not-found/route.js
-import { NextResponse } from 'next/server';
+```tsx
+// src/app/not-found/page.tsx
+// This is a server component - no "use client" directive
+import Link from "next/link"
 
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
-export const runtime = 'nodejs';
-export const preferredRegion = 'auto';
+// These exports ensure this page is not statically generated
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
 
-export async function GET() {
-  return NextResponse.json(
-    { message: 'Not Found' },
-    { status: 404 }
-  );
+export default function NotFoundPage() {
+  // Component implementation with inline styles
+  return (
+    <div style={{ 
+      minHeight: "100vh", 
+      display: "flex", 
+      flexDirection: "column",
+      backgroundColor: "var(--background, white)",
+      color: "var(--foreground, black)"
+    }}>
+      {/* Header, main content, and footer with inline styles */}
+      {/* ... */}
+    </div>
+  )
 }
 ```
 
 ### Middleware
 
-We created a middleware to handle 404 pages:
+We updated the middleware to handle 404 pages:
 
 ```js
 // src/middleware.js
@@ -98,8 +172,8 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   // Check if the request is for the not-found page
   if (request.nextUrl.pathname === '/_not-found') {
-    // Redirect to the custom 404 page
-    return NextResponse.redirect(new URL('/404', request.url));
+    // Redirect to our custom not-found page
+    return NextResponse.redirect(new URL('/not-found', request.url));
   }
 
   // Continue with the request

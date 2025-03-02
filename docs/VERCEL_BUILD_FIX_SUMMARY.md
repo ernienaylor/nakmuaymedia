@@ -14,7 +14,7 @@ This error occurred because the static generation process was trying to render c
 
 We implemented a comprehensive approach to fix the issue:
 
-1. **Created a standalone not-found page**: Updated `src/app/not-found.tsx` to use inline styles and removed the "use client" directive to make it a server component.
+1. **Created a standalone not-found page**: Created a completely separate not-found page in `/src/app/not-found/` with its own layout that doesn't use the theme context.
 
 2. **Updated the 404 page**: Applied the same standalone approach to `src/pages/404.tsx`.
 
@@ -31,14 +31,14 @@ We implemented a comprehensive approach to fix the issue:
 ## Key Files Created/Modified
 
 1. **Configuration Files**:
-   - `next.config.js`: Added configuration to disable static generation
+   - `next.config.js`: Added configuration to disable static generation and rewrites for the not-found page
    - `vercel.json`: Added custom routes for 404 pages
    - `.env.production`: Added environment variables
 
 2. **Special Handlers**:
-   - `src/app/not-found.config.js`: Configuration for the not-found page
-   - `src/app/not-found/route.js`: Route handler for the not-found page
-   - `src/middleware.js`: Middleware to handle 404 pages
+   - `src/app/not-found/layout.tsx`: Created a special layout for the not-found page that doesn't use the theme context
+   - `src/app/not-found/page.tsx`: Created a special not-found page that doesn't use the theme context
+   - `src/middleware.js`: Updated middleware to redirect `/_not-found` to our custom not-found page
 
 3. **Page Files**:
    - `src/app/not-found.tsx`: Updated to be a server component
