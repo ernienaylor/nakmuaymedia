@@ -8,6 +8,9 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 // Import the disable-static-generation file to disable static generation for the entire app
 import "./disable-static-generation";
 
+// Force dynamic rendering for the entire app
+export const dynamic = 'force-dynamic';
+
 // Define fonts with proper weights and subsets
 const montserrat = Montserrat({ 
   subsets: ["latin"],
