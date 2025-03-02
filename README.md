@@ -9,6 +9,7 @@ A modern, responsive website for Muay Thai news, events, fighter profiles, and c
 - **Content-Rich Sections**: Featured articles, fighter profiles, event calendars, and media content
 - **Interactive Components**: Tabs, cards, dropdowns, and more
 - **Dark/Light Mode**: Theme toggle for user preference
+- **Performance Optimized**: Image optimization, bundle analysis, and performance monitoring
 
 ## Tech Stack
 
@@ -17,6 +18,7 @@ A modern, responsive website for Muay Thai news, events, fighter profiles, and c
 - **UI Components**: shadcn/ui
 - **Typography**: Montserrat for headlines, Lora for body text
 - **Icons**: Lucide React
+- **Performance Tools**: Bundle analyzer, image optimization script
 
 ## Components
 
@@ -54,6 +56,8 @@ The website includes the following key components:
   - `/layout`: Layout components (header, footer, etc.)
 - `/lib`: Utility functions
 - `/public`: Static assets
+- `/scripts`: Utility scripts for deployment and optimization
+- `/docs`: Project documentation
 
 ## Design System
 
@@ -63,6 +67,68 @@ The design follows these principles:
 - **Warm yet Strong**: Red accent color (#B12025) for CTAs and highlights
 - **Editorially Structured**: WSJ-inspired content blocks with clear typographic hierarchy
 - **Energy-Infused**: Dynamic content cards with bold headlines and high-contrast imagery
+
+## Development Tools
+
+### Image Optimization
+
+The project includes a custom image optimization script:
+
+```bash
+npm run optimize-images
+```
+
+This processes images in the `public/images` directory, creating multiple sizes and formats for optimal performance. See [Image Optimization Guide](./docs/IMAGE_OPTIMIZATION.md) for details.
+
+### Performance Monitoring
+
+To check the performance of your website using Lighthouse:
+
+```bash
+npm run performance-check [url] [device]
+```
+
+Examples:
+```bash
+npm run performance-check https://nakmuaymedia.com mobile
+npm run performance-check https://nakmuaymedia.com desktop
+```
+
+This generates a comprehensive report with performance metrics, accessibility scores, and improvement suggestions.
+
+### Bundle Analysis
+
+To analyze the bundle size and identify optimization opportunities:
+
+```bash
+npm run analyze
+```
+
+This generates a visual representation of the bundle size, helping identify large dependencies.
+
+### Deployment
+
+Prepare for deployment with:
+
+```bash
+npm run prepare-deploy
+```
+
+Deploy to Vercel with:
+
+```bash
+npm run deploy
+```
+
+See [Deployment Guide](./docs/DEPLOYMENT.md) for more details.
+
+## Documentation
+
+- [Deployment Guide](./docs/DEPLOYMENT.md): Instructions for deploying to Vercel
+- [Testing Guide](./docs/TESTING.md): Testing procedures and best practices
+- [Image Optimization Guide](./docs/IMAGE_OPTIMIZATION.md): Best practices for image optimization
+- [Performance Guide](./docs/PERFORMANCE.md): Performance optimization strategies and tools
+- [SEO Guide](./docs/SEO.md): SEO optimization strategies
 
 ## License
 
