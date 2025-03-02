@@ -12,37 +12,52 @@ This error occurred because the static generation process was trying to render c
 
 ## Solution
 
-We implemented a comprehensive approach to fix the issue:
+We implemented a comprehensive multi-layered approach to fix the issue:
 
-1. **Created a standalone not-found page**: Created a completely separate not-found page in `/src/app/not-found/` with its own layout that doesn't use the theme context.
+1. **Completely removed the original not-found page**: Deleted `src/app/not-found.tsx` and created a new implementation in the `src/app/not-found/` directory with its own layout.
 
-2. **Updated the 404 page**: Applied the same standalone approach to `src/pages/404.tsx`.
+2. **Created multiple configuration files**: Added configuration files at various levels to ensure the not-found page is never statically generated:
+   - `src/app/next.config.js`: Configuration for the entire app directory
+   - `src/app/not-found/config.js`: Configuration specifically for the not-found page
+   - `src/app/disable-static-generation.js`: Imported in the root layout to disable static generation for all pages
 
-3. **Disabled static generation**: Updated Next.js configuration to disable static generation for the not-found page:
-   - Set `output: 'standalone'` in `next.config.js`
-   - Added `unstable_excludeFiles` to exclude not-found and 404 pages
-   - Created special configuration files for the not-found page
-   - Added environment variables to disable static generation
+3. **Added special route handlers**: Created route handlers to ensure the not-found page is handled properly:
+   - `src/app/not-found/route.js`: A special route handler for the not-found page
+   - `src/app/not-found.js`: A placeholder file that redirects to the custom not-found page
+   - `src/pages/_not-found.tsx`: A special handler for the pages directory
 
-4. **Added special route handling**: Created a route handler and middleware to ensure the not-found page is not statically generated.
+4. **Updated middleware**: Enhanced the middleware to handle all not-found routes and redirect them to our custom implementation.
 
-5. **Updated Vercel configuration**: Modified `vercel.json` to handle 404 pages properly.
+5. **Updated Next.js configuration**: Modified `next.config.js` to:
+   - Set `output: 'standalone'`
+   - Add `unstable_excludeFiles` to exclude not-found pages from static generation
+   - Add `experimental.disableStaticNotFound: true`
+   - Add redirects and rewrites for the not-found page
+
+6. **Updated Vercel configuration**: Modified `vercel.json` to handle 404 pages properly and added environment variables to disable static generation.
+
+7. **Added environment variables**: Created `.env.production` with variables to disable static generation for the entire app.
 
 ## Key Files Created/Modified
 
 1. **Configuration Files**:
-   - `next.config.js`: Added configuration to disable static generation and rewrites for the not-found page
-   - `vercel.json`: Added custom routes for 404 pages
+   - `next.config.js`: Added configuration to disable static generation and handle not-found pages
+   - `vercel.json`: Updated routes for 404 pages
    - `.env.production`: Added environment variables
+   - `src/app/next.config.js`: Special configuration for the app directory
+   - `src/app/disable-static-generation.js`: Imported in the root layout
 
 2. **Special Handlers**:
-   - `src/app/not-found/layout.tsx`: Created a special layout for the not-found page that doesn't use the theme context
-   - `src/app/not-found/page.tsx`: Created a special not-found page that doesn't use the theme context
-   - `src/middleware.js`: Updated middleware to redirect `/_not-found` to our custom not-found page
+   - `src/app/not-found/layout.tsx`: Special layout for the not-found page
+   - `src/app/not-found/page.tsx`: Custom not-found page implementation
+   - `src/app/not-found/config.js`: Configuration for the not-found page
+   - `src/app/not-found/route.js`: Route handler for the not-found page
+   - `src/app/not-found.js`: Placeholder file for the not-found route
+   - `src/pages/_not-found.tsx`: Special handler for the pages directory
+   - `src/middleware.js`: Updated to handle all not-found routes
 
-3. **Page Files**:
-   - `src/app/not-found.tsx`: Updated to be a server component
-   - `src/pages/404.tsx`: Updated to use inline styles
+3. **Layout Files**:
+   - `src/app/layout.tsx`: Updated to import the disable-static-generation file
 
 ## Testing
 
