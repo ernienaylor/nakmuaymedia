@@ -19,7 +19,10 @@ import {
 export default function ThemeDemoPage() {
   return (
     <>
-      <Section className="bg-background">
+      <Section 
+        className=""
+        style={{ backgroundColor: 'hsl(var(--background))' }}
+      >
         <Container>
           <div className="flex justify-between items-center mb-8">
             <TypographyH1 className="text-accent">Theme Demo</TypographyH1>
@@ -88,34 +91,70 @@ export default function ThemeDemoPage() {
                 <TypographyH2>Color System</TypographyH2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <div className="p-6 bg-accent text-primary rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Accent</p>
-                    <p className="text-sm opacity-90">#B12025</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>#B12025</p>
                   </div>
                   
-                  <div className="p-6 bg-primary text-secondary border rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Primary</p>
-                    <p className="text-sm opacity-90">#FFFFFF</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>#FFFFFF</p>
                   </div>
                   
-                  <div className="p-6 bg-secondary text-primary rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Secondary</p>
-                    <p className="text-sm opacity-90">#2D2D2D</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>#2D2D2D</p>
                   </div>
                   
-                  <div className="p-6 bg-neutral-light text-secondary rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Neutral Light</p>
-                    <p className="text-sm opacity-90">#F5F5F5</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>#F5F5F5</p>
                   </div>
                   
-                  <div className="p-6 bg-neutral-medium text-secondary rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Neutral Medium</p>
-                    <p className="text-sm opacity-90">#C4C4C4</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>#C4C4C4</p>
                   </div>
                   
-                  <div className="p-6 bg-background text-foreground border rounded-md">
+                  <div 
+                    className="p-6 border rounded-md"
+                    style={{ 
+                      backgroundColor: 'hsl(var(--background))',
+                      color: 'hsl(var(--foreground))'
+                    }}
+                  >
                     <p className="font-bold">Background</p>
-                    <p className="text-sm opacity-90">Dynamic (Light/Dark)</p>
+                    <p className="text-sm" style={{ opacity: 0.9 }}>Dynamic (Light/Dark)</p>
                   </div>
                 </div>
               </div>

@@ -189,7 +189,8 @@ export function FeaturedHeroSection({
                   />
                 </div>
                 
-                <div className="flex flex-col flex-grow p-4 bg-card border-b border-x rounded-b-lg border-border/60">
+                <div className="flex flex-col flex-grow p-4 border-b border-x rounded-b-lg border-border/60"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <Badge 
                     variant="outline" 
                     className="self-start mb-2 text-xs font-medium text-accent border-accent/30"

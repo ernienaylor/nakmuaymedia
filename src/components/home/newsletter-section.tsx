@@ -39,8 +39,8 @@ export function NewsletterSection({ className }: NewsletterSectionProps) {
   return (
     <section className={cn("py-16 md:py-24 relative overflow-hidden", className)}>
       {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/muay-thai-pattern.png')] bg-repeat opacity-10"></div>
+      <div className="absolute inset-0" style={{ opacity: 0.05 }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/muay-thai-pattern.png')] bg-repeat" style={{ opacity: 0.1 }}></div>
       </div>
       
       {/* Red accent line */}
@@ -49,7 +49,8 @@ export function NewsletterSection({ className }: NewsletterSectionProps) {
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div 
-            className="bg-card shadow-xl rounded-2xl overflow-hidden"
+            className="shadow-xl rounded-2xl overflow-hidden"
+            style={{ backgroundColor: 'hsl(var(--card))' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

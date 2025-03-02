@@ -11,7 +11,8 @@ module.exports = {
     // Enable Tailwind CSS v4 compatibility features
     hoverOnlyWhenSupported: true,
     respectDefaultRingColorOpacity: true,
-    disableColorOpacityUtilitiesByDefault: false, // Set to true for v4 behavior
+    disableColorOpacityUtilitiesByDefault: true, // Set to true for v4 behavior
+    // Add any other future flags as needed
   },
   theme: {
     container: {
@@ -165,6 +166,7 @@ module.exports = {
         "scale-in": "scaleIn 0.5s ease-in-out",
         "pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
+      // Define opacity values explicitly for v4 compatibility
       opacity: {
         '0': '0',
         '5': '0.05',

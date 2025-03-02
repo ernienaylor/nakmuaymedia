@@ -70,7 +70,8 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: var(--font-roboto), sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -151,7 +152,8 @@
   }
   
   .card {
-    @apply bg-card rounded-lg border border-border shadow-card transition-all duration-200;
+    background-color: hsl(var(--card));
+    @apply rounded-lg border border-border shadow-card transition-all duration-200;
   }
   
   .card:hover {

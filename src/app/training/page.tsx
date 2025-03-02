@@ -47,7 +47,8 @@ export default function TrainingPage() {
         </div>
 
         {/* Featured Training Video */}
-        <div className="rounded-lg overflow-hidden border bg-card shadow-sm">
+        <div className="rounded-lg overflow-hidden border shadow-sm"
+             style={{ backgroundColor: 'hsl(var(--card))' }}>
           <div className="aspect-video bg-neutral-light flex items-center justify-center">
             <p className="text-muted-foreground">Featured Training Video Placeholder</p>
           </div>
@@ -83,7 +84,8 @@ export default function TrainingPage() {
           <h2 className="text-2xl font-bold">Training Categories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {trainingCategories.map((category, index) => (
-              <div key={index} className="rounded-lg border bg-card p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div key={index} className="rounded-lg border p-6 shadow-sm hover:shadow-md transition-shadow"
+                   style={{ backgroundColor: 'hsl(var(--card))' }}>
                 <h3 className="text-xl font-bold">{category.title}</h3>
                 <p className="mt-2 text-muted-foreground">{category.description}</p>
                 <Link
@@ -113,7 +115,8 @@ export default function TrainingPage() {
         <div className="space-y-6">
           <h2 className="text-2xl font-bold">Training Programs</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-lg border bg-card p-6 shadow-sm">
+            <div className="rounded-lg border p-6 shadow-sm"
+                 style={{ backgroundColor: 'hsl(var(--card))' }}>
               <h3 className="text-xl font-bold">8-Week Beginner Program</h3>
               <p className="mt-2 text-muted-foreground">
                 A structured program designed to take you from zero to confident practitioner in just 8 weeks.
@@ -129,7 +132,8 @@ export default function TrainingPage() {
                 </Link>
               </div>
             </div>
-            <div className="rounded-lg border bg-card p-6 shadow-sm">
+            <div className="rounded-lg border p-6 shadow-sm"
+                 style={{ backgroundColor: 'hsl(var(--card))' }}>
               <h3 className="text-xl font-bold">Advanced Fighter Preparation</h3>
               <p className="mt-2 text-muted-foreground">
                 Designed for experienced practitioners preparing for competition. This 12-week program focuses on

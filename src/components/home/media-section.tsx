@@ -123,7 +123,8 @@ function VideoFeature({ video, relatedVideos }: { video: VideoItem, relatedVideo
                   />
                   
                   {/* Play button overlay */}
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-90 group-hover:opacity-70 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-70" 
+                       style={{ opacity: 0.9 }}>
                     <div className="w-20 h-20 rounded-full bg-accent/90 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Play className="h-10 w-10 text-white ml-1" />
                     </div>
@@ -203,7 +204,8 @@ function VideoFeature({ video, relatedVideos }: { video: VideoItem, relatedVideo
                       />
                       
                       {/* Play button overlay */}
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-100" 
+                           style={{ opacity: 0 }}>
                         <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center">
                           <Play className="h-6 w-6 text-white ml-0.5" />
                         </div>
@@ -415,7 +417,8 @@ function PodcastFeature({ podcast, recentEpisodes }: { podcast: PodcastItem, rec
             </div>
           </CardContent>
           
-          <CardFooter className="px-6 py-4 bg-muted/20 border-t border-border/50">
+          <CardFooter className="px-6 py-4 border-t border-border/50"
+                    style={{ backgroundColor: 'hsl(var(--muted) / 0.2)' }}>
             <div className="w-full flex items-center justify-between">
               <div className="flex items-center">
                 <Clock className="h-4 w-4 mr-1.5 text-muted-foreground" />

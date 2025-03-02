@@ -275,23 +275,28 @@ export function EnhancedFeaturedFighter({
             >
               {/* Record Summary */}
               <motion.div variants={itemVariants} className="grid grid-cols-5 gap-3">
-                <div className="flex flex-col items-center justify-center p-3 bg-card rounded-lg border border-border/50 shadow-sm">
+                <div className="flex flex-col items-center justify-center p-3 rounded-lg border border-border/50 shadow-sm"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <span className="text-3xl md:text-4xl font-bold text-accent">{fighter.record.wins}</span>
                   <span className="text-xs uppercase tracking-wider text-muted-foreground mt-1">Wins</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-3 bg-card rounded-lg border border-border/50 shadow-sm">
+                <div className="flex flex-col items-center justify-center p-3 rounded-lg border border-border/50 shadow-sm"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <span className="text-3xl md:text-4xl font-bold">{fighter.record.losses}</span>
                   <span className="text-xs uppercase tracking-wider text-muted-foreground mt-1">Losses</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-3 bg-card rounded-lg border border-border/50 shadow-sm">
+                <div className="flex flex-col items-center justify-center p-3 rounded-lg border border-border/50 shadow-sm"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <span className="text-3xl md:text-4xl font-bold">{fighter.record.draws}</span>
                   <span className="text-xs uppercase tracking-wider text-muted-foreground mt-1">Draws</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-3 bg-card rounded-lg border border-border/50 shadow-sm">
+                <div className="flex flex-col items-center justify-center p-3 rounded-lg border border-border/50 shadow-sm"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <span className="text-3xl md:text-4xl font-bold">{fighter.record.kos}</span>
                   <span className="text-xs uppercase tracking-wider text-muted-foreground mt-1">KOs</span>
                 </div>
-                <div className="flex flex-col items-center justify-center p-3 bg-card rounded-lg border border-border/50 shadow-sm">
+                <div className="flex flex-col items-center justify-center p-3 rounded-lg border border-border/50 shadow-sm"
+                     style={{ backgroundColor: 'hsl(var(--card))' }}>
                   <span className="text-3xl md:text-4xl font-bold">{totalFights}</span>
                   <span className="text-xs uppercase tracking-wider text-muted-foreground mt-1">Fights</span>
                 </div>
@@ -436,7 +441,8 @@ export function EnhancedFeaturedFighter({
                     {fighter.achievements.map((achievement) => (
                       <div 
                         key={achievement.id}
-                        className="flex items-start p-3 bg-card rounded-lg border border-border/50 shadow-sm"
+                        className="flex items-start p-3 rounded-lg border border-border/50 shadow-sm"
+                        style={{ backgroundColor: 'hsl(var(--card))' }}
                       >
                         <div className="mr-3 mt-1">
                           <Trophy className="h-5 w-5 text-accent" />
@@ -457,7 +463,8 @@ export function EnhancedFeaturedFighter({
                     {fighter.recentFights.map((fight) => (
                       <div 
                         key={fight.id}
-                        className="flex items-center p-3 bg-card rounded-lg border border-border/50 shadow-sm"
+                        className="flex items-center p-3 rounded-lg border border-border/50 shadow-sm"
+                        style={{ backgroundColor: 'hsl(var(--card))' }}
                       >
                         <div className="mr-3">
                           <div className={cn(

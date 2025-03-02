@@ -96,7 +96,10 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
   
   return (
-    <footer className="bg-background border-t border-border/40 pt-16 pb-8">
+    <footer 
+      className="border-t border-border/40 pt-16 pb-8"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
+    >
       <div className="container">
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12"
@@ -226,7 +229,8 @@ export function Footer() {
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+              <div key={i} className="grayscale hover:grayscale-0 transition-all duration-300 hover:opacity-100"
+                   style={{ opacity: 0.7 }}>
                 <div className="h-8 w-24 bg-muted/30 rounded-md"></div>
               </div>
             ))}

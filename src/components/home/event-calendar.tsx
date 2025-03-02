@@ -126,8 +126,10 @@ export function EventCalendar({
             )}
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex items-center bg-muted rounded-lg p-1">
-                <Filter className="h-4 w-4 text-muted-foreground ml-2 mr-1" />
+              <div className="flex items-center rounded-lg p-1"
+                   style={{ backgroundColor: 'hsl(var(--muted))' }}>
+                <Filter className="h-4 w-4 ml-2 mr-1" 
+                        style={{ color: 'hsl(var(--muted-foreground))' }} />
                 <select 
                   className="bg-transparent text-sm font-medium focus:outline-none"
                   value={filter}
@@ -205,7 +207,7 @@ export function EventCalendar({
                       <div className="flex flex-col items-center p-2 min-w-[80px]">
                         <span className="text-xs font-medium uppercase">{formatDate(featuredEvent.date).month}</span>
                         <span className="text-2xl font-bold leading-none">{formatDate(featuredEvent.date).day}</span>
-                        <span className="text-xs opacity-80">{formatDate(featuredEvent.date).weekday}</span>
+                        <span className="text-xs" style={{ opacity: 0.8 }}>{formatDate(featuredEvent.date).weekday}</span>
                       </div>
                     </div>
                     
@@ -217,11 +219,11 @@ export function EventCalendar({
                       
                       <div className="flex flex-wrap items-center gap-4 mb-4">
                         <div className="flex items-center">
-                          <Clock className="h-4 w-4 mr-1 opacity-80" />
+                          <Clock className="h-4 w-4 mr-1" style={{ opacity: 0.8 }} />
                           <span>{featuredEvent.time}</span>
                         </div>
                         <div className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-1 opacity-80" />
+                          <MapPin className="h-4 w-4 mr-1" style={{ opacity: 0.8 }} />
                           <span>{featuredEvent.venue}, {featuredEvent.location}</span>
                         </div>
                       </div>
@@ -401,7 +403,8 @@ export function EventCalendar({
                     <Link href={`/events/${event.slug}`} className="block">
                       <div className="flex items-stretch">
                         {/* Date Column */}
-                        <div className="flex flex-col items-center justify-center p-4 bg-muted min-w-[80px] text-center">
+                        <div className="flex flex-col items-center justify-center p-4 min-w-[80px] text-center"
+                             style={{ backgroundColor: 'hsl(var(--muted))' }}>
                           <span className="text-xs font-medium uppercase">{formatDate(event.date).month}</span>
                           <span className="text-2xl font-bold leading-none">{formatDate(event.date).day}</span>
                           <span className="text-xs text-muted-foreground">{formatDate(event.date).weekday}</span>
@@ -436,11 +439,11 @@ export function EventCalendar({
                           
                           <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-2">
                             <div className="flex items-center">
-                              <Clock className="h-3.5 w-3.5 mr-1" />
+                              <Clock className="h-3.5 w-3.5 mr-1" style={{ opacity: 0.8 }} />
                               <span>{event.time}</span>
                             </div>
                             <div className="flex items-center">
-                              <MapPin className="h-3.5 w-3.5 mr-1" />
+                              <MapPin className="h-3.5 w-3.5 mr-1" style={{ opacity: 0.8 }} />
                               <span className="line-clamp-1">{event.venue}, {event.location}</span>
                             </div>
                           </div>

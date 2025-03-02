@@ -161,7 +161,7 @@ export function LayoutDebugger({ enabled = false }: { enabled?: boolean }) {
   
   return (
     <div className="fixed inset-0 z-[9999] pointer-events-none">
-      <div className="h-full w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-4 px-4 mx-auto max-w-7xl opacity-20">
+      <div className="h-full w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-4 px-4 mx-auto max-w-7xl" style={{ opacity: 0.2 }}>
         {Array.from({ length: 12 }).map((_, i) => (
           <div key={i} className="bg-red-500 h-full"></div>
         ))}

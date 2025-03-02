@@ -52,6 +52,65 @@ After running the fix script, try deploying again:
 npm run deploy
 ```
 
+### Common Deployment Errors
+
+#### Tailwind CSS Compatibility Issues
+
+1. **Cannot apply unknown utility class: bg-background**
+
+   This error occurs when Tailwind CSS v4 cannot recognize the `bg-background` utility class. This is a common issue when using custom theme variables.
+
+   **Solution:**
+   - Replace `className="bg-background"` with inline styles:
+     ```jsx
+     <div style={{ backgroundColor: 'hsl(var(--background))' }}>...</div>
+     ```
+   - Or in CSS files, replace `@apply bg-background` with:
+     ```css
+     background-color: hsl(var(--background));
+     ```
+
+2. **Cannot apply unknown utility class: text-foreground**
+
+   Similar to the above, this error occurs with the `text-foreground` utility class.
+
+   **Solution:**
+   - Replace `className="text-foreground"` with inline styles:
+     ```jsx
+     <div style={{ color: 'hsl(var(--foreground))' }}>...</div>
+     ```
+   - Or in CSS files, replace `@apply text-foreground` with:
+     ```css
+     color: hsl(var(--foreground));
+     ```
+
+3. **Other Theme Variable Utility Classes**
+
+   The same issue applies to other theme variable utility classes like `bg-card`, `text-card-foreground`, `bg-muted`, and `text-muted-foreground`.
+
+   **Solution:**
+   - Replace with corresponding inline styles:
+     ```jsx
+     // Instead of className="bg-card"
+     style={{ backgroundColor: 'hsl(var(--card))' }}
+     
+     // Instead of className="text-card-foreground"
+     style={{ color: 'hsl(var(--card-foreground))' }}
+     
+     // Instead of className="bg-muted"
+     style={{ backgroundColor: 'hsl(var(--muted))' }}
+     
+     // Instead of className="text-muted-foreground"
+     style={{ color: 'hsl(var(--muted-foreground))' }}
+     ```
+   - Or in CSS files, use direct HSL variables
+
+4. **Opacity Utility Issues**
+
+   - Instead of `@apply border-opacity-80`, use `border-color: hsl(var(--border) / 0.8)`
+   - Instead of `@apply bg-opacity-90`, use `background-color: hsl(var(--background) / 0.9)`
+   - Check your tailwind.config.js to ensure all plugins and extensions are properly configured
+
 ## Deployment Options
 
 ### Option 1: Deploy via Vercel Dashboard (Recommended)

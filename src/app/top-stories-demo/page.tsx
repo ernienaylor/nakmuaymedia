@@ -4,7 +4,10 @@ import { Container, Section } from "@/components/ui/container"
 export default function TopStoriesDemoPage() {
   return (
     <main>
-      <Section className="py-12 md:py-16 bg-background">
+      <Section 
+        className="py-12 md:py-16"
+        style={{ backgroundColor: 'hsl(var(--background))' }}
+      >
         <Container>
           <div className="mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">Top Stories Component</h1>

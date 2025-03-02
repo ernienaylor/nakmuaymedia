@@ -64,7 +64,10 @@ export function TypographySmall({ children, className }: TypographyProps) {
 
 export function TypographyMuted({ children, className }: TypographyProps) {
   return (
-    <p className={cn("text-sm text-muted-foreground", className)}>
+    <p 
+      className={cn("text-sm", className)}
+      style={{ color: "hsl(var(--muted-foreground))" }}
+    >
       {children}
     </p>
   );
@@ -80,7 +83,10 @@ export function TypographyLead({ children, className }: TypographyProps) {
 
 export function TypographyBlockquote({ children, className }: TypographyProps) {
   return (
-    <blockquote className={cn("border-l-4 border-accent pl-4 italic", className)}>
+    <blockquote 
+      className={cn("pl-4 italic", className)}
+      style={{ borderLeftWidth: "4px", borderLeftColor: "hsl(var(--accent))" }}
+    >
       {children}
     </blockquote>
   );

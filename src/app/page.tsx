@@ -641,7 +641,10 @@ const mediaContent = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main 
+      className="min-h-screen"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
+    >
       {/* Hero Section */}
       <FeaturedHeroSection 
         mainArticle={featuredArticles[0]}

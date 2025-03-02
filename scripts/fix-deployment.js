@@ -193,6 +193,54 @@ function checkTailwindCompatibility() {
           opacity: ${opacity}`;
         },
         message: 'opacity-* classes may have changed in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+bg-background/g,
+        replacement: () => {
+          return `/* Replaced @apply bg-background with direct HSL variable */
+          background-color: hsl(var(--background))`;
+        },
+        message: 'bg-background utility class is not recognized in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+text-foreground/g,
+        replacement: () => {
+          return `/* Replaced @apply text-foreground with direct HSL variable */
+          color: hsl(var(--foreground))`;
+        },
+        message: 'text-foreground utility class is not recognized in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+bg-card/g,
+        replacement: () => {
+          return `/* Replaced @apply bg-card with direct HSL variable */
+          background-color: hsl(var(--card))`;
+        },
+        message: 'bg-card utility class is not recognized in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+text-card-foreground/g,
+        replacement: () => {
+          return `/* Replaced @apply text-card-foreground with direct HSL variable */
+          color: hsl(var(--card-foreground))`;
+        },
+        message: 'text-card-foreground utility class is not recognized in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+bg-muted/g,
+        replacement: () => {
+          return `/* Replaced @apply bg-muted with direct HSL variable */
+          background-color: hsl(var(--muted))`;
+        },
+        message: 'bg-muted utility class is not recognized in Tailwind CSS v4'
+      },
+      {
+        pattern: /@apply\s+text-muted-foreground/g,
+        replacement: () => {
+          return `/* Replaced @apply text-muted-foreground with direct HSL variable */
+          color: hsl(var(--muted-foreground))`;
+        },
+        message: 'text-muted-foreground utility class is not recognized in Tailwind CSS v4'
       }
     ];
     
@@ -205,6 +253,20 @@ function checkTailwindCompatibility() {
         log(`  Instances found: ${matches.length}`, colors.dim);
         globalsCss = globalsCss.replace(classInfo.pattern, classInfo.replacement);
       }
+    }
+    
+    // Check for body element with bg-background
+    const bodyBgPattern = /body\s*{\s*@apply\s+bg-background\s+text-foreground/g;
+    if (bodyBgPattern.test(globalsCss)) {
+      hasChanges = true;
+      log('Found @apply bg-background in body selector. Replacing with direct HSL variables.', colors.yellow);
+      
+      globalsCss = globalsCss.replace(
+        /body\s*{\s*@apply\s+bg-background\s+text-foreground([^}]*)\}/g,
+        (match, rest) => {
+          return `body {\n  background-color: hsl(var(--background));\n  color: hsl(var(--foreground))${rest}\n}`;
+        }
+      );
     }
     
     // Check for border-opacity in * selector

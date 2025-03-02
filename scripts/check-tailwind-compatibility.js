@@ -59,12 +59,36 @@ const patterns = [
     ]
   },
   {
+    name: 'Theme Variables',
+    description: 'Theme variables that may not be recognized in Tailwind CSS v4',
+    patterns: [
+      { regex: /className="[^"]*\b(bg-background)\b[^"]*"/g, replacement: 'style={{ backgroundColor: "hsl(var(--background))" }}' },
+      { regex: /className="[^"]*\b(text-foreground)\b[^"]*"/g, replacement: 'style={{ color: "hsl(var(--foreground))" }}' },
+      { regex: /className=\{[^}]*\b(bg-background)\b[^}]*\}/g, replacement: 'style={{ backgroundColor: "hsl(var(--background))" }}' },
+      { regex: /className=\{[^}]*\b(text-foreground)\b[^}]*\}/g, replacement: 'style={{ color: "hsl(var(--foreground))" }}' },
+      { regex: /className="[^"]*\b(bg-card)\b[^"]*"/g, replacement: 'style={{ backgroundColor: "hsl(var(--card))" }}' },
+      { regex: /className="[^"]*\b(text-card-foreground)\b[^"]*"/g, replacement: 'style={{ color: "hsl(var(--card-foreground))" }}' },
+      { regex: /className=\{[^}]*\b(bg-card)\b[^}]*\}/g, replacement: 'style={{ backgroundColor: "hsl(var(--card))" }}' },
+      { regex: /className=\{[^}]*\b(text-card-foreground)\b[^}]*\}/g, replacement: 'style={{ color: "hsl(var(--card-foreground))" }}' },
+      { regex: /className="[^"]*\b(bg-muted)\b[^"]*"/g, replacement: 'style={{ backgroundColor: "hsl(var(--muted))" }}' },
+      { regex: /className="[^"]*\b(text-muted-foreground)\b[^"]*"/g, replacement: 'style={{ color: "hsl(var(--muted-foreground))" }}' },
+      { regex: /className=\{[^}]*\b(bg-muted)\b[^}]*\}/g, replacement: 'style={{ backgroundColor: "hsl(var(--muted))" }}' },
+      { regex: /className=\{[^}]*\b(text-muted-foreground)\b[^}]*\}/g, replacement: 'style={{ color: "hsl(var(--muted-foreground))" }}' }
+    ]
+  },
+  {
     name: 'HSL Opacity in CSS',
     description: 'CSS files using @apply with opacity utilities',
     patterns: [
       { regex: /@apply\s+border-opacity-\d+/g, replacement: 'border-color: hsl(var(--border) / {opacity})' },
       { regex: /@apply\s+bg-opacity-\d+/g, replacement: 'background-color: hsl(var(--background) / {opacity})' },
-      { regex: /@apply\s+text-opacity-\d+/g, replacement: 'color: hsl(var(--foreground) / {opacity})' }
+      { regex: /@apply\s+text-opacity-\d+/g, replacement: 'color: hsl(var(--foreground) / {opacity})' },
+      { regex: /@apply\s+bg-background/g, replacement: 'background-color: hsl(var(--background))' },
+      { regex: /@apply\s+text-foreground/g, replacement: 'color: hsl(var(--foreground))' },
+      { regex: /@apply\s+bg-card/g, replacement: 'background-color: hsl(var(--card))' },
+      { regex: /@apply\s+text-card-foreground/g, replacement: 'color: hsl(var(--card-foreground))' },
+      { regex: /@apply\s+bg-muted/g, replacement: 'background-color: hsl(var(--muted))' },
+      { regex: /@apply\s+text-muted-foreground/g, replacement: 'color: hsl(var(--muted-foreground))' }
     ]
   },
   {
@@ -208,6 +232,9 @@ function main() {
   log('4. For standalone opacity utilities, ensure they are defined in tailwind.config.js:', colors.bright);
   log('   Check: className="opacity-80"', colors.reset);
   log('   Verify: opacity: { "80": "0.8" } exists in the config', colors.reset);
+  log('5. For theme variables, replace with inline styles:', colors.bright);
+  log('   Change: className="bg-background text-foreground"', colors.reset);
+  log('   To:     style={{ backgroundColor: "hsl(var(--background))", color: "hsl(var(--foreground))" }}', colors.reset);
 }
 
 // Run the script

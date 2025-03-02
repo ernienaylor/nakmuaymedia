@@ -11,12 +11,12 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-accent text-primary hover:bg-accent/80",
+          "border-transparent hover:bg-accent/80",
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "border-transparent hover:bg-secondary/80",
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+          "border-transparent hover:bg-destructive/80",
+        outline: "",
       },
     },
     defaultVariants: {
@@ -30,8 +30,42 @@ export interface BadgeProps
     VariantProps<typeof badgeVariants> {}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
+  // Define styles based on variant
+  const getStyles = () => {
+    switch(variant) {
+      case 'default':
+        return {
+          backgroundColor: "hsl(var(--accent))",
+          color: "hsl(var(--primary))"
+        }
+      case 'secondary':
+        return {
+          backgroundColor: "hsl(var(--secondary))",
+          color: "hsl(var(--secondary-foreground))"
+        }
+      case 'destructive':
+        return {
+          backgroundColor: "hsl(var(--destructive))",
+          color: "hsl(var(--destructive-foreground))"
+        }
+      case 'outline':
+        return {
+          color: "hsl(var(--foreground))"
+        }
+      default:
+        return {
+          backgroundColor: "hsl(var(--accent))",
+          color: "hsl(var(--primary))"
+        }
+    }
+  }
+  
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div 
+      className={cn(badgeVariants({ variant }), className)} 
+      style={getStyles()}
+      {...props} 
+    />
   )
 }
 

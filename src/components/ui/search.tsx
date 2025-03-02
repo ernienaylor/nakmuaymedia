@@ -55,7 +55,11 @@ export function Search({ className, ...props }: SearchProps) {
           ref={inputRef}
           type="search"
           placeholder="Search..."
-          className="h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-none"
+          className="h-9 w-full rounded-md px-3 py-1 text-sm shadow-none"
+          style={{ 
+            backgroundColor: 'hsl(var(--background))',
+            borderColor: 'hsl(var(--input))'
+          }}
         />
       </div>
       <Button
@@ -66,6 +70,9 @@ export function Search({ className, ...props }: SearchProps) {
           "ml-1 h-9 w-9 rounded-md transition-colors",
           isExpanded && "text-accent"
         )}
+        style={{
+          color: isExpanded ? 'hsl(var(--accent))' : undefined
+        }}
         aria-label="Search"
       >
         <SearchIcon className="h-4 w-4" />

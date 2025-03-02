@@ -10,6 +10,7 @@ Tailwind CSS v4 introduces several breaking changes that may affect our codebase
 2. **Color Opacity**: The approach to color opacity has been updated to use a more intuitive slash syntax.
 3. **JIT Engine**: The Just-In-Time engine is now the default and only option.
 4. **Configuration Changes**: Several configuration options have been deprecated or changed.
+5. **Custom Theme Variables**: The way custom theme variables are accessed has changed.
 
 ## Common Issues and Solutions
 
@@ -105,6 +106,69 @@ The modern slash syntax for opacity is already compatible with Tailwind CSS v4:
 
 This syntax is preferred and should be used consistently throughout the codebase.
 
+### 6. Custom Theme Variables
+
+In Tailwind CSS v4, custom theme variables like `bg-background` and `text-foreground` may not be recognized directly in utility classes. Instead, use CSS variables directly:
+
+#### Old Approach (v3):
+```css
+body {
+  @apply bg-background text-foreground;
+}
+```
+
+#### New Approach (v4):
+```css
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+```
+
+This is particularly important for elements that use theme variables defined in the `:root` selector.
+
+### 7. Other Theme Variable Utilities
+
+Several other theme variable utilities may also cause issues in Tailwind CSS v4:
+
+#### Card Utilities:
+```jsx
+// Old - may cause build errors
+<div className="bg-card text-card-foreground">...</div>
+
+// New - use inline styles
+<div style={{
+  backgroundColor: 'hsl(var(--card))',
+  color: 'hsl(var(--card-foreground))'
+}}>...</div>
+```
+
+#### Muted Utilities:
+```jsx
+// Old - may cause build errors
+<div className="bg-muted text-muted-foreground">...</div>
+
+// New - use inline styles
+<div style={{
+  backgroundColor: 'hsl(var(--muted))',
+  color: 'hsl(var(--muted-foreground))'
+}}>...</div>
+```
+
+#### In CSS Files:
+```css
+/* Old */
+.element {
+  @apply bg-muted text-muted-foreground;
+}
+
+/* New */
+.element {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+```
+
 ## Automated Fixes
 
 Our project includes a deployment fix script that can automatically detect and fix many Tailwind CSS v4 compatibility issues:
@@ -118,6 +182,7 @@ This script:
 - Identifies component files with potential compatibility issues
 - Automatically fixes simple cases in `globals.css`
 - Provides guidance for manual fixes in component files
+- Replaces `@apply bg-background` and `@apply text-foreground` with direct HSL variables
 
 For a quick check of potential issues, you can also run:
 
@@ -155,6 +220,19 @@ Some issues require manual intervention:
    // These should be reviewed
    <div className="opacity-80">...</div>
    <span className="opacity-90">...</span>
+   ```
+
+4. **Theme Variable Usage**: Replace direct theme variable utilities with CSS variables:
+
+   ```jsx
+   // Old - may cause build errors
+   <div className="bg-background text-foreground">...</div>
+   
+   // New - use inline styles or create custom classes
+   <div style={{
+     backgroundColor: 'hsl(var(--background))',
+     color: 'hsl(var(--foreground))'
+   }}>...</div>
    ```
 
 ## Configuration Updates
@@ -199,6 +277,22 @@ After making changes, test your components thoroughly:
 2. Visually inspect components that use opacity to ensure they render correctly.
 
 3. Use the browser inspector to verify that the correct CSS is being applied.
+
+## Common Build Errors
+
+Here are some common build errors you might encounter with Tailwind CSS v4:
+
+1. **Cannot apply unknown utility class: bg-background**
+   - This occurs when using `@apply bg-background` in CSS or `className="bg-background"` in components
+   - Solution: Use `background-color: hsl(var(--background))` instead
+
+2. **Cannot apply unknown utility class: text-foreground**
+   - This occurs when using `@apply text-foreground` in CSS or `className="text-foreground"` in components
+   - Solution: Use `color: hsl(var(--foreground))` instead
+
+3. **Unknown modifier: bg-opacity-X**
+   - This occurs when using the old opacity syntax
+   - Solution: Use the slash syntax (e.g., `bg-red-500/50`) instead
 
 ## Additional Resources
 

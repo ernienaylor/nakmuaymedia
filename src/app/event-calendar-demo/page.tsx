@@ -5,7 +5,10 @@ import { EventCalendar, sampleEvents } from "@/components/home/event-calendar"
 
 export default function EventCalendarDemoPage() {
   return (
-    <main className="min-h-screen bg-background">
+    <main 
+      className="min-h-screen"
+      style={{ backgroundColor: 'hsl(var(--background))' }}
+    >
       <div className="py-12 md:py-20">
         <div className="container">
           <div className="max-w-3xl mx-auto mb-16 text-center">
