@@ -1,35 +1,30 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { topStories } from '@/lib/data';
 
-export default function TopStories({ stories = [] }) {
+export default function TopStories() {
+  // Display only the first 3 stories
+  const displayedStories = topStories.slice(0, 3);
+  
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {stories.map((story) => (
-        <div key={story.id} className="news-card">
-          <div className="news-card-image">
-            <Image 
-              src={story.image || "/images/placeholder.jpg"} 
-              alt={story.title} 
-              width={400}
-              height={225}
-              className="w-full h-full object-cover"
-            />
-            <div className="news-card-category">{story.category}</div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {displayedStories.length > 0 ? (
+        displayedStories.map((story, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="h-48 bg-neutral-200"></div>
+            <div className="p-4">
+              <h3 className="text-lg font-bold mb-1">{story.title || "News Article"}</h3>
+              <p className="text-sm text-neutral-500 mb-2">{story.date || "Recent"}</p>
+              <p className="text-neutral-700 line-clamp-3">{story.excerpt || "Article excerpt will appear here."}</p>
+            </div>
           </div>
-          <div className="news-card-content">
-            <Link href={`/news/${story.slug}`}>
-              <h3 className="news-card-title">{story.title}</h3>
-            </Link>
-            <div className="news-card-meta">{story.date}</div>
-            <p className="news-card-excerpt">
-              {story.excerpt}
-            </p>
-            <Link href={`/news/${story.slug}`} className="btn-primary text-sm">
-              Read More
-            </Link>
-          </div>
+        ))
+      ) : (
+        <div className="col-span-full bg-white rounded-lg shadow-md p-6 text-center">
+          <h3 className="text-xl font-bold mb-2">News Coming Soon</h3>
+          <p className="text-neutral-600">Check back for the latest Muay Thai news and updates.</p>
         </div>
-      ))}
+      )}
     </div>
   );
 } 

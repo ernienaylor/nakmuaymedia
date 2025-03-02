@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import React from 'react';
 
 export default function EventsCalendar({ events = [] }) {
   return (
@@ -14,7 +15,7 @@ export default function EventsCalendar({ events = [] }) {
       ) : (
         <div className="bg-white rounded-lg shadow-md p-6 text-center">
           <h3 className="text-xl font-bold mb-2">Events Coming Soon</h3>
-          <p className="text-gray-600">Check back later for upcoming Muay Thai events.</p>
+          <p className="text-neutral-600">Check back later for upcoming Muay Thai events.</p>
         </div>
       )}
     </div>

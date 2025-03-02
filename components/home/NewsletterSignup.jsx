@@ -39,28 +39,30 @@ export default function NewsletterSignup() {
   };
   
   return (
-    <section className="section bg-primary-50 py-16">
-      <div className="container-custom">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-heading font-bold mb-4">Stay in the Fight Loop</h2>
-          <p className="text-neutral-700 mb-8">
-            Subscribe to our newsletter to receive the latest Muay Thai news, exclusive content, and event updates directly to your inbox.
-          </p>
-          
-          {isSuccess ? (
-            <div className="bg-green-50 text-green-800 p-4 rounded-md mb-6">
-              <p className="font-medium">Thanks for subscribing!</p>
-              <p>You'll start receiving our newsletter soon.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="newsletter-input"
+    <div className="bg-secondary py-12">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+          Stay Updated with Muay Thai News
+        </h2>
+        <p className="text-white/80 mb-6 max-w-2xl mx-auto">
+          Subscribe to our newsletter to receive the latest news, fighter updates, and event announcements.
+        </p>
+        
+        {isSuccess ? (
+          <div className="bg-accent/20 text-white p-4 rounded-lg max-w-md mx-auto">
+            <p className="font-medium">Thank you for subscribing!</p>
+            <p className="text-sm mt-1">You'll receive our next newsletter in your inbox.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="newsletter-form">
+            <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+              <input
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
                 required
+                className="newsletter-input"
                 disabled={isSubmitting}
               />
               <button 
@@ -70,18 +72,11 @@ export default function NewsletterSignup() {
               >
                 {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </button>
-            </form>
-          )}
-          
-          {error && (
-            <div className="text-primary mt-2">{error}</div>
-          )}
-          
-          <p className="text-xs text-neutral-500 mt-3">
-            We respect your privacy. Unsubscribe at any time.
-          </p>
-        </div>
+            </div>
+            {error && <p className="text-red-300 mt-2 text-sm">{error}</p>}
+          </form>
+        )}
       </div>
-    </section>
+    </div>
   );
 } 
