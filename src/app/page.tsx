@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { FeaturedHeroSection } from "@/components/home/featured-hero-section"
@@ -11,6 +11,7 @@ import { EventCalendar } from "@/components/home/event-calendar"
 import { MediaSection } from "@/components/home/media-section"
 import { NewsletterSection } from "@/components/home/newsletter-section"
 import { DebugToolbar, usePrefersReducedMotion } from "@/utils/test-utils"
+import { useTheme } from "@/components/ui/theme"
 
 // Data interfaces
 // FeaturedHeroSection Article interface
@@ -236,8 +237,16 @@ function EnhancedSection({
     )
   }
 
+  // Add home-section class to all sections
+  const sectionClassName = `home-section ${className || ''}`;
+  
+  // Add neutral-light class if the className contains bg-neutral-light
+  const finalClassName = sectionClassName.includes('bg-neutral-light') 
+    ? sectionClassName.replace('bg-neutral-light', 'neutral-light')
+    : sectionClassName;
+
   return (
-    <AnimatedSection className={className} delay={delay}>
+    <AnimatedSection className={finalClassName} delay={delay}>
       {children}
     </AnimatedSection>
   )
@@ -643,10 +652,26 @@ const mediaContent = {
 export const dynamic = 'force-dynamic';
 
 export default function Home() {
+  // Add state for theme initialization
+  const [isThemeReady, setIsThemeReady] = useState(false);
+  const { isDark } = useTheme();
+  
+  // Effect to handle theme initialization
+  useEffect(() => {
+    // Mark theme as ready after component mounts
+    setIsThemeReady(true);
+  }, []);
+
   return (
     <main 
       className="min-h-screen"
-      style={{ backgroundColor: 'hsl(var(--background))' }}
+      style={{ 
+        backgroundColor: isThemeReady 
+          ? 'hsl(var(--background))' 
+          : isDark 
+            ? 'hsl(0 0% 10%)' // Dark fallback
+            : 'hsl(0 0% 100%)' // Light fallback
+      }}
     >
       {/* Hero Section */}
       <FeaturedHeroSection 
@@ -656,7 +681,7 @@ export default function Home() {
       
       {/* Featured Fighter */}
       <EnhancedSection 
-        className="bg-neutral-light py-16 md:py-24 border-t border-border/20"
+        className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.1}
       >
         <EnhancedFeaturedFighter 
@@ -679,7 +704,7 @@ export default function Home() {
       
       {/* Top Stories */}
       <EnhancedSection 
-        className="bg-neutral-light py-16 md:py-24 border-t border-border/20"
+        className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.3}
       >
         <TopStories 
@@ -706,7 +731,7 @@ export default function Home() {
       
       {/* Media Section */}
       <EnhancedSection 
-        className="bg-neutral-light py-16 md:py-24 border-t border-border/20"
+        className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.5}
       >
         <MediaSection 
@@ -724,9 +749,11 @@ export default function Home() {
       >
         <NewsletterSection />
       </EnhancedSection>
-
-      {/* Debug Toolbar - only visible in development */}
-      <DebugToolbar />
+      
+      {/* Debug Toolbar - Only visible in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <DebugToolbar />
+      )}
     </main>
   )
 } 

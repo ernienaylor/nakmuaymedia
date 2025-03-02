@@ -98,11 +98,11 @@ export function FeaturedHeroSection({
   }
 
   return (
-    <Section className={cn("pt-20 md:pt-28 pb-12 md:pb-16", className)}>
+    <Section className={cn("pt-20 md:pt-28 pb-12 md:pb-16 home-section", className)}>
       <Container>
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-4">
-            <div className="h-1 w-8 bg-accent rounded-full" />
+            <div className="h-1 w-8 bg-accent accent-fix rounded-full" />
             <h2 className="text-lg font-heading font-bold uppercase tracking-wider">Featured Stories</h2>
           </div>
         </div>
@@ -131,7 +131,7 @@ export function FeaturedHeroSection({
                   <div className="animate-fade-slide-in">
                     <Badge 
                       variant="default" 
-                      className="mb-3 text-xs font-bold uppercase tracking-wider px-3 py-1 bg-accent text-white"
+                      className="mb-3 text-xs font-bold uppercase tracking-wider px-3 py-1 bg-accent accent-fix text-white"
                     >
                       {mainArticle.category}
                     </Badge>
@@ -155,7 +155,7 @@ export function FeaturedHeroSection({
                       <Button 
                         variant="default" 
                         size="sm" 
-                        className="group/btn bg-accent hover:bg-accent/90 text-white transition-all duration-300"
+                        className="group/btn bg-accent accent-fix hover:bg-accent/90 text-white transition-all duration-300"
                       >
                         <span>Read Article</span>
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -189,8 +189,7 @@ export function FeaturedHeroSection({
                   />
                 </div>
                 
-                <div className="flex flex-col flex-grow p-4 border-b border-x rounded-b-lg border-border/60"
-                     style={{ backgroundColor: 'hsl(var(--card))' }}>
+                <div className="flex flex-col flex-grow p-4 border-b border-x rounded-b-lg border-border/60 card-fix">
                   <Badge 
                     variant="outline" 
                     className="self-start mb-2 text-xs font-medium text-accent border-accent/30"

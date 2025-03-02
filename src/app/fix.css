@@ -107,6 +107,52 @@
   --border-color: hsl(var(--border));
   --input-color: hsl(var(--input));
   --ring-color: hsl(var(--ring));
+  
+  /* Fallback colors for initial render */
+  --fallback-background: 0 0% 100%;
+  --fallback-foreground: 0 0% 18%;
+  --fallback-card: 0 0% 100%;
+  --fallback-card-foreground: 0 0% 18%;
+  --fallback-accent: 358 70% 41%;
+  --fallback-accent-foreground: 0 0% 100%;
+  --fallback-muted: 0 0% 96%;
+  --fallback-muted-foreground: 0 0% 45%;
+  --fallback-border: 0 0% 90%;
+}
+
+.dark {
+  --fallback-background: 0 0% 10%;
+  --fallback-foreground: 0 0% 98%;
+  --fallback-card: 0 0% 15%;
+  --fallback-card-foreground: 0 0% 98%;
+  --fallback-accent: 358 70% 50%;
+  --fallback-accent-foreground: 0 0% 100%;
+  --fallback-muted: 0 0% 20%;
+  --fallback-muted-foreground: 0 0% 70%;
+  --fallback-border: 0 0% 30%;
+}
+
+/* Fix for home page sections */
+.home-section {
+  background-color: hsl(var(--background, var(--fallback-background)));
+  color: hsl(var(--foreground, var(--fallback-foreground)));
+}
+
+.home-section.neutral-light {
+  background-color: hsl(var(--muted, var(--fallback-muted)));
+}
+
+/* Fix for card rendering */
+.card-fix {
+  background-color: hsl(var(--card, var(--fallback-card)));
+  color: hsl(var(--card-foreground, var(--fallback-card-foreground)));
+  border-color: hsl(var(--border, var(--fallback-border)));
+}
+
+/* Fix for accent elements */
+.accent-fix {
+  background-color: hsl(var(--accent, var(--fallback-accent)));
+  color: hsl(var(--accent-foreground, var(--fallback-accent-foreground)));
 }
 
 /* Animations */
