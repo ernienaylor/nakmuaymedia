@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { cva } from 'class-variance-authority'
+import { useTheme as useNextTheme } from 'next-themes'
 
 // Button component variants
 export const buttonVariants = cva(
@@ -159,23 +160,30 @@ type ThemeContextType = {
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
+  const { theme, setTheme } = useNextTheme()
   const [isDark, setIsDark] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
 
   // Check for user preference on mount
   React.useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains('dark')
-    setIsDark(isDarkMode)
-  }, [])
+    setMounted(true)
+    setIsDark(theme === 'dark')
+  }, [theme])
+
+  // Update isDark when theme changes
+  React.useEffect(() => {
+    if (mounted) {
+      setIsDark(theme === 'dark')
+    }
+  }, [theme, mounted])
 
   const toggleTheme = () => {
-    setIsDark(!isDark)
-    if (isDark) {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    }
+    setTheme(isDark ? 'light' : 'dark')
+  }
+
+  // Avoid rendering with incorrect theme
+  if (!mounted) {
+    return <>{children}</>
   }
 
   return (

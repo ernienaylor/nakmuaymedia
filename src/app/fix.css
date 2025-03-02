@@ -1,0 +1,140 @@
+/* Fix for navigation menu display */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Fix for dropdown menus */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  min-width: 14rem;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Fix for theme toggle */
+.theme-toggle-icon {
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+/* Fix for mobile menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: hsla(var(--background), 0.95);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Fix for logo */
+.logo {
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: hsl(var(--accent));
+  letter-spacing: -0.025em;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Fix for header spacing */
+.header-container {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  transition: height 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .header-container {
+    height: 5rem;
+    padding: 0 2rem;
+  }
+}
+
+/* Fix for main content padding */
+.main-content {
+  padding-top: 5rem;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding-top: 6rem;
+  }
+}
+
+/* Fix for HSL colors */
+:root {
+  --background-color: hsl(var(--background));
+  --foreground-color: hsl(var(--foreground));
+  --card-color: hsl(var(--card));
+  --card-foreground-color: hsl(var(--card-foreground));
+  --popover-color: hsl(var(--popover));
+  --popover-foreground-color: hsl(var(--popover-foreground));
+  --primary-color: hsl(var(--primary));
+  --primary-foreground-color: hsl(var(--primary-foreground));
+  --secondary-color: hsl(var(--secondary));
+  --secondary-foreground-color: hsl(var(--secondary-foreground));
+  --muted-color: hsl(var(--muted));
+  --muted-foreground-color: hsl(var(--muted-foreground));
+  --accent-color: hsl(var(--accent));
+  --accent-foreground-color: hsl(var(--accent-foreground));
+  --destructive-color: hsl(var(--destructive));
+  --destructive-foreground-color: hsl(var(--destructive-foreground));
+  --border-color: hsl(var(--border));
+  --input-color: hsl(var(--input));
+  --ring-color: hsl(var(--ring));
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.3s ease forwards;
+} 

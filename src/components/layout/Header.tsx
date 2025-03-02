@@ -125,149 +125,71 @@ export function Header() {
   }, [searchExpanded])
 
   return (
-    <header 
+    <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-md border-b border-border/40 shadow-sm" 
-          : "bg-background"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-200 header-container",
+        {
+          "bg-background/80 backdrop-blur-md shadow-sm": isScrolled,
+          "bg-background": !isScrolled,
+        }
       )}
     >
-      {/* Desktop Header */}
-      <div className="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
-        {/* Logo Section */}
+      <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
-          <Logo 
-            size="large" 
-            className={cn(
-              "transition-all duration-300",
-              isScrolled ? "scale-90" : "scale-100"
-            )} 
-          />
-          <p className={cn(
-            "ml-2 text-xs text-muted-foreground hidden md:block transition-opacity duration-300",
-            isScrolled ? "opacity-0" : "opacity-100"
-          )}>
-            Your Ringside Seat to Muay Thai Action
-          </p>
+          <Logo size="large" className="logo" />
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-1">
+        <nav className="hidden md:flex items-center space-x-1">
           {navItems.map((item) => (
             <NavItem key={item.title} item={item} />
           ))}
         </nav>
 
-        {/* Right Section - Search & Theme Toggle */}
-        <div className="flex items-center space-x-1">
-          {/* Search */}
-          <div id="search-container" className="relative flex items-center">
-            <div className={cn(
-              "overflow-hidden transition-all duration-300 ease-in-out",
-              searchExpanded ? "w-[200px] md:w-[300px] opacity-100" : "w-0 opacity-0"
-            )}>
-              <input
-                ref={searchInputRef}
-                type="search"
-                placeholder="Search..."
-                className="h-9 w-full rounded-md border border-input px-3 py-1 text-sm shadow-none focus:ring-1 focus:ring-accent"
-                style={{ backgroundColor: 'hsl(var(--background))' }}
-              />
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSearch}
-              className={cn(
-                "ml-1 h-9 w-9 rounded-md transition-colors",
-                searchExpanded && "text-accent"
-              )}
-              aria-label="Search"
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="18" 
-                height="18" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </Button>
-          </div>
-
-          {/* Theme Toggle */}
+        <div className="flex items-center space-x-2">
           <ModeToggle />
-
-          {/* Mobile Menu Button */}
+          
+          {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden ml-1"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open Menu"
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <Menu className="h-5 w-5" />
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={cn(
-        "fixed inset-0 bg-background/95 backdrop-blur-md z-50 lg:hidden transition-all duration-300 flex flex-col",
-        mobileMenuOpen 
-          ? "opacity-100 pointer-events-auto" 
-          : "opacity-0 pointer-events-none"
-      )}>
-        {/* Mobile Menu Header */}
-        <div className="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between border-b border-border/40">
-          <Logo size="large" />
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close Menu"
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-
-        {/* Mobile Menu Content */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="container mx-auto px-4 py-8">
-            <MobileNavigation 
-              items={navItems} 
-              onItemClick={() => setMobileMenuOpen(false)} 
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu md:hidden">
+          <div className="container mx-auto py-4">
+            <MobileNavigation
+              items={navItems}
+              onClose={() => setMobileMenuOpen(false)}
             />
           </div>
         </div>
-
-        {/* Mobile Menu Footer */}
-        <div className="container mx-auto px-4 py-4 border-t border-border/40">
-          <p className="text-sm text-muted-foreground text-center">
-            Your Ringside Seat to Muay Thai Action
-          </p>
-        </div>
-      </div>
+      )}
     </header>
   )
 }
 
 // Desktop Navigation Item Component
-function NavItem({ item }: { item: typeof navItems[0] }) {
+function NavItem({ item }: { item: (typeof navItems)[number] }) {
   const [isOpen, setIsOpen] = React.useState(false)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) && isOpen) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false)
       }
     }
@@ -281,7 +203,7 @@ function NavItem({ item }: { item: typeof navItems[0] }) {
   // If item has subitems, render dropdown
   if (item.items) {
     return (
-      <div ref={dropdownRef} className="relative group">
+      <div ref={dropdownRef} className="relative group nav-item">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
@@ -300,7 +222,7 @@ function NavItem({ item }: { item: typeof navItems[0] }) {
 
         {/* Dropdown Menu */}
         <div className={cn(
-          "absolute top-full left-0 mt-1 w-56 rounded-md border border-border bg-card shadow-lg overflow-hidden transition-all duration-200 origin-top-left",
+          "dropdown-menu",
           isOpen 
             ? "opacity-100 scale-100 translate-y-0" 
             : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
@@ -319,12 +241,11 @@ function NavItem({ item }: { item: typeof navItems[0] }) {
             <div className="h-px bg-border/60 my-1"></div>
             
             {/* Subcategory Links */}
-            {item.items.map((subItem, index) => (
+            {item.items.map((subItem) => (
               <Link
                 key={subItem.title}
                 href={subItem.href}
                 className="flex items-center w-full rounded-md p-2 text-sm hover:bg-accent/10 hover:text-accent transition-colors"
-                style={{ animationDelay: `${index * 50}ms` }}
                 onClick={() => setIsOpen(false)}
               >
                 {subItem.title}
@@ -340,7 +261,7 @@ function NavItem({ item }: { item: typeof navItems[0] }) {
   return (
     <Link
       href={item.href}
-      className="px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent"
+      className="nav-item px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent"
     >
       {item.title}
     </Link>
@@ -350,10 +271,10 @@ function NavItem({ item }: { item: typeof navItems[0] }) {
 // Mobile Navigation Component
 function MobileNavigation({ 
   items, 
-  onItemClick 
+  onClose 
 }: { 
   items: typeof navItems,
-  onItemClick: () => void
+  onClose: () => void
 }) {
   return (
     <nav className="space-y-6">
@@ -362,7 +283,7 @@ function MobileNavigation({
           key={item.title} 
           item={item} 
           index={index}
-          onItemClick={onItemClick}
+          onItemClick={onClose}
         />
       ))}
     </nav>
@@ -382,10 +303,7 @@ function MobileNavItem({
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (
-    <div 
-      className="animate-fade-in"
-      style={{ animationDelay: `${index * 50}ms` }}
-    >
+    <div className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
       <div className="flex items-center justify-between">
         <Link
           href={item.href}
@@ -422,10 +340,6 @@ function MobileNavItem({
               key={subItem.title}
               href={subItem.href}
               className="block py-2 text-base text-muted-foreground transition-all duration-200 hover:text-accent hover:translate-x-1"
-              style={{ 
-                animationDelay: `${(index * 50) + (subIndex * 30)}ms`,
-                animation: 'fadeSlideIn 0.3s ease forwards',
-              }}
               onClick={onItemClick}
             >
               {subItem.title}

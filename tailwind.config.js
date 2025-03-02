@@ -12,7 +12,9 @@ module.exports = {
     hoverOnlyWhenSupported: true,
     respectDefaultRingColorOpacity: true,
     disableColorOpacityUtilitiesByDefault: true, // Set to true for v4 behavior
-    // Add any other future flags as needed
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+    standardFontWeights: true,
   },
   theme: {
     container: {
@@ -63,43 +65,43 @@ module.exports = {
           dark: "#8A8A8A",
         },
         
-        // Semantic colors
-        border: "#E5E5E5",
-        input: "#E5E5E5",
-        ring: "#2D2D2D",
-        background: "#FFFFFF",
-        foreground: "#2D2D2D",
+        // Semantic colors - using HSL values for v4 compatibility
+        border: "hsl(0 0% 90%)",
+        input: "hsl(0 0% 90%)",
+        ring: "hsl(0 0% 18%)",
+        background: "hsl(0 0% 100%)",
+        foreground: "hsl(0 0% 18%)",
         primary: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#2D2D2D",
+          DEFAULT: "hsl(0 0% 100%)",
+          foreground: "hsl(0 0% 18%)",
         },
         secondary: {
-          DEFAULT: "#2D2D2D",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(0 0% 18%)",
+          foreground: "hsl(0 0% 100%)",
         },
         accent: {
-          DEFAULT: "#B12025",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(358 70% 41%)",
+          foreground: "hsl(0 0% 100%)",
         },
         destructive: {
-          DEFAULT: "#B12025",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(358 70% 41%)",
+          foreground: "hsl(0 0% 100%)",
         },
         muted: {
-          DEFAULT: "#F5F5F5",
-          foreground: "#737373",
+          DEFAULT: "hsl(0 0% 96%)",
+          foreground: "hsl(0 0% 45%)",
         },
         card: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#2D2D2D",
+          DEFAULT: "hsl(0 0% 100%)",
+          foreground: "hsl(0 0% 18%)",
         },
         popover: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#2D2D2D",
+          DEFAULT: "hsl(0 0% 100%)",
+          foreground: "hsl(0 0% 18%)",
         },
         neutral: {
-          light: "#F5F5F5",
-          medium: "#C4C4C4",
+          light: "hsl(0 0% 96%)",
+          medium: "hsl(0 0% 77%)",
         },
       },
       borderRadius: {

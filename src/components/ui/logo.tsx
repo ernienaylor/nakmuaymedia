@@ -30,10 +30,10 @@ export function Logo({ className, size = "default" }: LogoProps) {
         style={{ 
           fontSize: getFontSize(),
           color: "hsl(var(--accent))",
-          "&:hover": {
-            color: "hsla(var(--accent), 0.9)"
-          }
-        } as React.CSSProperties}
+          fontFamily: "var(--font-montserrat)",
+          fontWeight: "700",
+          letterSpacing: "-0.025em"
+        }}
       >
         Nak Muay Media
       </span>
