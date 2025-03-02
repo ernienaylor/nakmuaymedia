@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 import Link from 'next/link';
-import NewsGrid from '@/components/news/NewsGrid.jsx';
+import NewsGrid from '@/components/news/NewsGrid';
 import { topStories } from '@/lib/data';
 
 export default function NewsPage() {

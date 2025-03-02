@@ -21,7 +21,7 @@ const nextConfig = {
   // Enable experimental features if needed
   experimental: {
     // Enable server components if you're using them
-    // appDir: true,
+    appDir: true,
     // Configure optimizeCss with critters options
     optimizeCss: {
       critters: {
@@ -91,6 +91,11 @@ const nextConfig = {
   },
   // Disable static generation for specific pages
   output: 'standalone',
+  // Configure webpack to resolve .js extensions for .jsx files
+  webpack(config) {
+    config.resolve.extensions = ['.js', '.jsx', '.json', ...config.resolve.extensions];
+    return config;
+  },
 };
 
 // Add bundle analyzer in analyze mode
