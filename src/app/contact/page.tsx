@@ -4,6 +4,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+// Force dynamic rendering to avoid theme context issues during static generation
+export const dynamic = 'force-dynamic';
+
 export default function ContactPage() {
   return (
     <div className="container py-12 md:py-24">

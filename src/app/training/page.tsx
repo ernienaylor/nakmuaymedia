@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+// Force dynamic rendering to avoid theme context issues during static generation
+export const dynamic = 'force-dynamic';
+
 export default function TrainingPage() {
   // Sample training categories
   const trainingCategories = [
