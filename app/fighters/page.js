@@ -3,7 +3,7 @@ export const metadata = {
   description: 'Profiles of top Muay Thai fighters from around the world, including records, achievements, and fighting styles.',
 };
 
-import FighterGrid from '@/components/fighters/FighterGrid';
+import FighterGrid from '@/components/fighters/FighterGrid.js';
 import { allFighters } from '@/lib/data';
 
 export default function FightersPage() {

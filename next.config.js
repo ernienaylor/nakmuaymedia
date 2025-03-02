@@ -20,21 +20,8 @@ const nextConfig = {
   },
   // Enable experimental features if needed
   experimental: {
-    // Enable server components if you're using them
-    appDir: true,
-    // Configure optimizeCss with critters options
-    optimizeCss: {
-      critters: {
-        // Reduce CSS size by removing unused styles
-        pruneSource: true,
-        // Don't inline critical CSS (can cause issues with some frameworks)
-        inlineFonts: false,
-        // Avoid processing SVG and font files
-        preload: 'media',
-        // Minimize network requests
-        compress: true,
-      },
-    },
+    // Remove appDir as it's no longer needed in Next.js 15
+    optimizeCss: true,
   },
   // Configure headers for better security and performance
   async headers() {
