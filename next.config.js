@@ -35,6 +35,8 @@ const nextConfig = {
         compress: true,
       },
     },
+    // Disable static generation for the not-found page
+    disableStaticNotFound: true,
   },
   // Configure headers for better security and performance
   async headers() {
@@ -70,7 +72,14 @@ const nextConfig = {
   },
   // Configure redirects if needed
   async redirects() {
-    return [];
+    return [
+      // Redirect the /_not-found route to our custom not-found page
+      {
+        source: '/_not-found',
+        destination: '/not-found',
+        permanent: true,
+      },
+    ];
   },
   // Configure rewrites if needed
   async rewrites() {

@@ -5,6 +5,8 @@ import "./fix.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+// Import the disable-static-generation file to disable static generation for the entire app
+import "./disable-static-generation";
 
 // Define fonts with proper weights and subsets
 const montserrat = Montserrat({ 

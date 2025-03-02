@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 // It ensures that the not-found page is not statically generated
 export function middleware(request) {
   // Check if the request is for the not-found page
-  if (request.nextUrl.pathname === '/_not-found') {
+  if (request.nextUrl.pathname === '/_not-found' || request.nextUrl.pathname === '/not-found.html') {
     // Redirect to our custom not-found page
     return NextResponse.redirect(new URL('/not-found', request.url));
   }
@@ -15,5 +15,5 @@ export function middleware(request) {
 
 // Configure the middleware to run on specific paths
 export const config = {
-  matcher: ['/_not-found', '/_not-found/(.*)'],
+  matcher: ['/_not-found', '/_not-found/(.*)', '/not-found.html'],
 }; 

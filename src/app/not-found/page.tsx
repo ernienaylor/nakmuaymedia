@@ -1,6 +1,9 @@
 // This is a server component - no "use client" directive
 import Link from "next/link"
 
+// Import the configuration file to disable static generation
+import "./config"
+
 // These exports ensure this page is not statically generated
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -8,6 +11,11 @@ export const revalidate = 0
 export const fetchCache = 'force-no-store'
 export const runtime = 'nodejs'
 export const preferredRegion = 'auto'
+
+// Disable static generation for this page
+export const generateStaticParams = () => {
+  return [];
+};
 
 export default function NotFoundPage() {
   return (

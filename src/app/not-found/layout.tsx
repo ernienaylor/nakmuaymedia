@@ -4,6 +4,9 @@ import { Montserrat, Roboto } from "next/font/google";
 import "../globals.css";
 import "../fix.css";
 
+// Import the configuration file to disable static generation
+import "./config"
+
 // Define fonts with proper weights and subsets
 const montserrat = Montserrat({ 
   subsets: ["latin"],
