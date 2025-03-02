@@ -195,8 +195,16 @@ export function ThemeContextProvider({ children }: { children: React.ReactNode }
 
 export function useTheme() {
   const context = React.useContext(ThemeContext)
+  
+  // Return a default context if undefined (this prevents errors during SSR or static generation)
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeContextProvider')
+    // Instead of throwing an error, return a default context
+    console.warn('useTheme was used outside of ThemeContextProvider, using default values')
+    return {
+      isDark: false,
+      toggleTheme: () => console.warn('Theme toggle attempted outside provider')
+    }
   }
+  
   return context
 } 
