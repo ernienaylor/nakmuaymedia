@@ -38,11 +38,13 @@ This script automatically:
 1. Checks for missing dependencies and installs them
 2. Validates Next.js configuration and removes deprecated options
 3. Ensures proper environment setup for Vercel deployment
+4. Fixes Tailwind CSS compatibility issues
 
 Common deployment issues this script can fix:
 - Missing UI component dependencies
 - Deprecated Next.js configuration options
 - Missing or incorrect Vercel configuration
+- Tailwind CSS v4 compatibility issues (like opacity utilities)
 
 After running the fix script, try deploying again:
 
@@ -147,12 +149,20 @@ If you encounter issues during deployment:
    - Verify all dependencies are correctly installed
    - Ensure Next.js configuration is correct
 
-2. **Runtime errors**:
+2. **Tailwind CSS errors**:
+   - If you see errors about unknown utility classes (like `border-opacity-80`), run the fix-deployment script
+   - For Tailwind CSS v4, use direct HSL opacity notation instead of opacity utilities:
+     - Instead of `@apply border-opacity-80`, use `border-color: hsl(var(--border) / 0.8)`
+     - Instead of `@apply bg-opacity-90`, use `background-color: hsl(var(--background) / 0.9)`
+   - Check your tailwind.config.js to ensure all plugins and extensions are properly configured
+   - **For detailed guidance, refer to our [Tailwind CSS v4 Compatibility Guide](./TAILWIND_COMPATIBILITY.md)**
+
+3. **Runtime errors**:
    - Check browser console for JavaScript errors
    - Verify environment variables are set correctly
    - Check server logs in Vercel dashboard
 
-3. **Performance issues**:
+4. **Performance issues**:
    - Optimize images and assets
    - Enable caching headers
    - Consider using a CDN for static assets
@@ -164,6 +174,13 @@ If you need help with deployment:
 - Consult [Vercel documentation](https://vercel.com/docs)
 - Check [Next.js deployment docs](https://nextjs.org/docs/deployment)
 - Contact the development team for project-specific issues
+
+## Additional Resources
+
+- [Vercel documentation](https://vercel.com/docs)
+- [Next.js deployment docs](https://nextjs.org/docs/deployment)
+- [Tailwind CSS v4 Compatibility Guide](./TAILWIND_COMPATIBILITY.md)
+- [Bundle Analysis Guide](./BUNDLE_ANALYSIS.md)
 
 ---
 

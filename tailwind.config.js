@@ -7,6 +7,12 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  future: {
+    // Enable Tailwind CSS v4 compatibility features
+    hoverOnlyWhenSupported: true,
+    respectDefaultRingColorOpacity: true,
+    disableColorOpacityUtilitiesByDefault: false, // Set to true for v4 behavior
+  },
   theme: {
     container: {
       center: true,
@@ -158,6 +164,23 @@ module.exports = {
         "fade-slide-in": "fadeSlideIn 0.5s ease-in-out",
         "scale-in": "scaleIn 0.5s ease-in-out",
         "pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+      opacity: {
+        '0': '0',
+        '5': '0.05',
+        '10': '0.1',
+        '20': '0.2',
+        '25': '0.25',
+        '30': '0.3',
+        '40': '0.4',
+        '50': '0.5',
+        '60': '0.6',
+        '70': '0.7',
+        '75': '0.75',
+        '80': '0.8',
+        '90': '0.9',
+        '95': '0.95',
+        '100': '1',
       },
     },
   },

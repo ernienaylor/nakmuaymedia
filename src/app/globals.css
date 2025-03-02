@@ -66,8 +66,7 @@
   }
   
   * {
-    border-color: hsl(var(--border));
-    @apply border-opacity-80;
+    border-color: hsl(var(--border) / 0.8);
   }
   
   body {

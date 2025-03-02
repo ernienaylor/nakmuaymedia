@@ -13,7 +13,8 @@
     "deploy": "vercel --prod",
     "optimize-images": "node scripts/optimize-images.js",
     "performance-check": "node scripts/performance-check.js",
-    "fix-deployment": "node scripts/fix-deployment.js"
+    "fix-deployment": "node scripts/fix-deployment.js",
+    "check-tailwind": "node scripts/check-tailwind-compatibility.js"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.2.0",
