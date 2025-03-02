@@ -32,10 +32,11 @@
       ]
     }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/_not-found", "dest": "/not-found", "status": 404 },
-    { "src": "/(.*)", "status": 404, "dest": "/not-found" }
+  "rewrites": [
+    { "source": "/_not-found", "destination": "/not-found" }
+  ],
+  "redirects": [
+    { "source": "/_not-found", "destination": "/not-found", "permanent": true }
   ],
   "build": {
     "env": {
