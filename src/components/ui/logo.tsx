@@ -9,18 +9,26 @@ interface LogoProps {
 }
 
 export function Logo({ className, size = "default" }: LogoProps) {
+  // Define font sizes based on size prop
+  const getFontSize = () => {
+    switch(size) {
+      case "small":
+        return "1.125rem"; // text-lg
+      case "large":
+        return "1.5rem"; // text-2xl
+      default:
+        return "1.25rem"; // text-xl
+    }
+  };
+
   return (
     <Link href="/" className={cn("flex items-center", className)}>
       <span 
         className={cn(
           "font-heading font-bold tracking-tight transition-colors",
-          {
-            "text-xl": size === "default",
-            "text-lg": size === "small",
-            "text-2xl": size === "large",
-          }
         )}
         style={{ 
+          fontSize: getFontSize(),
           color: "hsl(var(--accent))",
           "&:hover": {
             color: "hsla(var(--accent), 0.9)"

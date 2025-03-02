@@ -110,8 +110,11 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold", className)}
-    style={{ color: "hsl(var(--foreground))" }}
+    className={cn("font-semibold", className)}
+    style={{ 
+      fontSize: "1.125rem", // text-lg
+      color: "hsl(var(--foreground))" 
+    }}
     {...props}
   />
 ))
@@ -123,8 +126,11 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-sm", className)}
-    style={{ color: "hsl(var(--muted-foreground))" }}
+    className={cn("", className)}
+    style={{ 
+      fontSize: "0.875rem", // text-sm
+      color: "hsl(var(--muted-foreground))" 
+    }}
     {...props}
   />
 ))
