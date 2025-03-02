@@ -35,8 +35,6 @@ const nextConfig = {
         compress: true,
       },
     },
-    // Disable static generation for the not-found page
-    disableStaticNotFound: true,
   },
   // Configure headers for better security and performance
   async headers() {
@@ -89,29 +87,10 @@ const nextConfig = {
         source: '/_not-found',
         destination: '/not-found',
       },
-      // Handle 404 pages
-      {
-        source: '/:path*',
-        destination: '/not-found',
-        missing: [
-          {
-            type: 'page',
-            value: 'missing',
-          },
-        ],
-      },
     ];
   },
   // Disable static generation for specific pages
   output: 'standalone',
-  // Configure which pages should not be statically generated
-  unstable_excludeFiles: [
-    '**/not-found.js', 
-    '**/not-found.js.map', 
-    '**/404.js', 
-    '**/404.js.map',
-    '**/not-found/**',
-  ],
 };
 
 // Add bundle analyzer in analyze mode
