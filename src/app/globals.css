@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 18%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 18%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 18%;
+    
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 18%;
+    
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 358 70% 41%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    --destructive: 358 70% 41%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 18%;
+    
+    --radius: 0.5rem;
+  }
+  
+  .dark {
+    --background: 0 0% 18%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 18%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 18%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 0 0% 18%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 18%;
+    
+    --accent: 358 70% 41%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%;
+    
+    --destructive: 358 70% 41%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 24%;
+    --input: 0 0% 24%;
+    --ring: 0 0% 83%;
+  }
+  
+  * {
+    border-color: hsl(var(--border));
+    @apply border-opacity-80;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-roboto), sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+  
+  h1 {
+    @apply text-5xl mb-6 tracking-wide;
+  }
+  
+  h2 {
+    @apply text-4xl mb-5 tracking-wide;
+  }
+  
+  h3 {
+    @apply text-3xl mb-4;
+  }
+  
+  h4 {
+    @apply text-2xl mb-3;
+  }
+  
+  h5 {
+    @apply text-xl mb-2;
+  }
+  
+  h6 {
+    @apply text-lg mb-2;
+  }
+  
+  p {
+    @apply mb-4 text-base leading-relaxed;
+  }
+  
+  a {
+    @apply text-accent transition-colors duration-200;
+  }
+  
+  a:hover {
+    @apply text-accent/80;
+  }
+}
+
+@layer components {
+  .container-tight {
+    @apply container max-w-4xl mx-auto px-4 md:px-8;
+  }
+  
+  .container-wide {
+    @apply container max-w-7xl mx-auto px-4 md:px-8;
+  }
+  
+  .section-padding {
+    @apply py-12 md:py-24;
+  }
+  
+  .heading-accent {
+    @apply text-accent;
+  }
+  
+  .heading-large {
+    @apply text-5xl md:text-6xl font-bold tracking-wide uppercase;
+  }
+  
+  .heading-medium {
+    @apply text-3xl md:text-4xl font-bold tracking-wide uppercase;
+  }
+  
+  .heading-small {
+    @apply text-xl md:text-2xl font-bold tracking-wide uppercase;
+  }
+  
+  .card {
+    @apply bg-card rounded-lg border border-border shadow-card transition-all duration-200;
+  }
+  
+  .card:hover {
+    @apply shadow-card-hover;
+  }
+  
+  .card-content {
+    @apply p-6;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors 
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+    disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+  
+  .btn-primary {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  .btn-outline {
+    @apply border border-input hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-muted hover:text-accent;
+  }
+  
+  .btn-sm {
+    @apply h-9 px-3 rounded-md;
+  }
+  
+  .btn-md {
+    @apply h-10 py-2 px-4;
+  }
+  
+  .btn-lg {
+    @apply h-11 px-8 rounded-md;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation classes */
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.5s ease forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.5s ease forwards;
+}
+
+/* Animation delays */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Header animations */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
