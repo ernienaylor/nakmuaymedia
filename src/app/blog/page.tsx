@@ -3,6 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+// Force dynamic rendering to avoid theme context issues during static generation
+export const dynamic = 'force-dynamic';
+
 export default function BlogPage() {
   // Sample blog posts
   const blogPosts = [
