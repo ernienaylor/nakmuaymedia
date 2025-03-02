@@ -22,8 +22,19 @@ const nextConfig = {
   experimental: {
     // Enable server components if you're using them
     // appDir: true,
-    // Enable optimizeCss for production builds
-    optimizeCss: true,
+    // Configure optimizeCss with critters options
+    optimizeCss: {
+      critters: {
+        // Reduce CSS size by removing unused styles
+        pruneSource: true,
+        // Don't inline critical CSS (can cause issues with some frameworks)
+        inlineFonts: false,
+        // Avoid processing SVG and font files
+        preload: 'media',
+        // Minimize network requests
+        compress: true,
+      },
+    },
   },
   // Configure headers for better security and performance
   async headers() {
