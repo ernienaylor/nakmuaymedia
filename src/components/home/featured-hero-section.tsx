@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { Container, Section } from "@/components/ui/container"
 import { TypographyH2, TypographyH3, TypographyP, TypographyLead } from "@/components/ui/typography"
+import { useTheme } from "@/components/ui/theme"
 
 // Sample data for the featured content
 const FEATURED_CONTENT = {
@@ -84,6 +85,9 @@ export function FeaturedHeroSection({
   secondaryArticles = FEATURED_CONTENT.secondaryArticles,
   className,
 }: FeaturedHeroSectionProps) {
+  const { isDark } = useTheme();
+  const [imagesLoaded, setImagesLoaded] = React.useState(false);
+  
   // Function to handle image errors
   const getImageSrc = (src: string, isMain: boolean = false) => {
     // If the image path starts with http, it's already a full URL
@@ -96,6 +100,15 @@ export function FeaturedHeroSection({
     // in the onError handler of the Image component
     return src;
   }
+  
+  React.useEffect(() => {
+    // Mark images as loaded after a short delay to ensure proper rendering
+    const timer = setTimeout(() => {
+      setImagesLoaded(true);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Section className={cn("pt-20 md:pt-28 pb-12 md:pb-16 home-section", className)}>
@@ -113,21 +126,31 @@ export function FeaturedHeroSection({
             <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl flex-1">
               <Link href={`/article/${mainArticle.slug}`} className="block h-full">
                 <div className="relative aspect-[16/10] md:aspect-[16/9] lg:aspect-auto lg:h-full overflow-hidden">
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20 z-10" 
+                    style={{ opacity: imagesLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+                  />
+                  <div 
+                    className="absolute inset-0 bg-neutral-800"
+                    style={{ opacity: imagesLoaded ? 0 : 1, transition: 'opacity 0.3s ease' }}
+                  />
                   <Image
                     src={getImageSrc(mainArticle.image, true)}
                     alt={mainArticle.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     priority
+                    onLoad={() => setImagesLoaded(true)}
                     onError={(e) => {
                       // @ts-ignore - TypeScript doesn't know about currentTarget.src
                       e.currentTarget.src = PLACEHOLDER_IMAGES.main;
+                      setImagesLoaded(true);
                     }}
+                    style={{ opacity: imagesLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20" />
                 </div>
                 
-                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8 z-20">
                   <div className="animate-fade-slide-in">
                     <Badge 
                       variant="default" 
@@ -177,15 +200,22 @@ export function FeaturedHeroSection({
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
+                  <div 
+                    className="absolute inset-0 bg-neutral-800"
+                    style={{ opacity: imagesLoaded ? 0 : 1, transition: 'opacity 0.3s ease' }}
+                  />
                   <Image
                     src={getImageSrc(article.image)}
                     alt={article.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    onLoad={() => setImagesLoaded(true)}
                     onError={(e) => {
                       // @ts-ignore - TypeScript doesn't know about currentTarget.src
                       e.currentTarget.src = PLACEHOLDER_IMAGES.secondary;
+                      setImagesLoaded(true);
                     }}
+                    style={{ opacity: imagesLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
                   />
                 </div>
                 

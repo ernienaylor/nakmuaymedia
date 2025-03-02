@@ -208,13 +208,13 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors nav-link",
             isOpen 
               ? "text-accent" 
               : "hover:text-accent focus:text-accent"
           )}
           style={{
-            color: isOpen ? `hsl(var(--accent, ${isDark ? '358 70% 50%' : '358 70% 41%'}))` : 'inherit'
+            color: isOpen ? `hsl(var(--accent, ${isDark ? '358 70% 50%' : '358 70% 41%'}))` : ''
           }}
         >
           {item.title}
@@ -265,7 +265,7 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
   return (
     <Link
       href={item.href}
-      className="px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent nav-item"
+      className="px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent nav-item nav-link"
     >
       {item.title}
     </Link>

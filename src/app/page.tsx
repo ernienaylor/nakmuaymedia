@@ -654,12 +654,20 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   // Add state for theme initialization
   const [isThemeReady, setIsThemeReady] = useState(false);
+  const [contentLoaded, setContentLoaded] = useState(false);
   const { isDark } = useTheme();
   
   // Effect to handle theme initialization
   useEffect(() => {
     // Mark theme as ready after component mounts
     setIsThemeReady(true);
+    
+    // Add a small delay to ensure content is loaded properly
+    const timer = setTimeout(() => {
+      setContentLoaded(true);
+    }, 200);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -683,6 +691,7 @@ export default function Home() {
       <EnhancedSection 
         className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.1}
+        isLoading={!contentLoaded}
       >
         <EnhancedFeaturedFighter 
           fighter={featuredFighter}
@@ -693,6 +702,7 @@ export default function Home() {
       <EnhancedSection 
         className="py-16 md:py-24 border-t border-border/20"
         delay={0.2}
+        isLoading={!contentLoaded}
       >
         <EnhancedNewsGrid 
           articles={newsArticles}
@@ -706,6 +716,7 @@ export default function Home() {
       <EnhancedSection 
         className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.3}
+        isLoading={!contentLoaded}
       >
         <TopStories 
           mainStory={topStories.mainStory}
@@ -720,6 +731,7 @@ export default function Home() {
       <EnhancedSection 
         className="py-16 md:py-24 border-t border-border/20"
         delay={0.4}
+        isLoading={!contentLoaded}
       >
         <EventCalendar 
           events={upcomingEvents}
@@ -733,6 +745,7 @@ export default function Home() {
       <EnhancedSection 
         className={`${isThemeReady ? 'bg-neutral-light' : ''} py-16 md:py-24 border-t border-border/20`}
         delay={0.5}
+        isLoading={!contentLoaded}
       >
         <MediaSection 
           featuredVideo={mediaContent.featuredVideo}
@@ -746,6 +759,7 @@ export default function Home() {
       <EnhancedSection 
         className="py-16 md:py-24 border-t border-border/20"
         delay={0.6}
+        isLoading={!contentLoaded}
       >
         <NewsletterSection />
       </EnhancedSection>
