@@ -1,11 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
     "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -14,16 +11,26 @@ module.exports = {
           DEFAULT: '#d32f2f',
           dark: '#b71c1c',
           light: '#ef5350',
+          50: '#ffebee',
+          100: '#ffcdd2',
+          200: '#ef9a9a',
+          300: '#e57373',
+          400: '#ef5350',
+          500: '#d32f2f',
+          600: '#c62828',
+          700: '#b71c1c',
+          800: '#9e1818',
+          900: '#891414',
         },
         secondary: {
           DEFAULT: '#212121',
-          dark: '#000000',
           light: '#484848',
+          dark: '#000000',
         },
         accent: {
-          DEFAULT: '#ffc107',
-          dark: '#ffa000',
-          light: '#ffecb3',
+          DEFAULT: '#FFC107',
+          dark: '#FFA000',
+          light: '#FFECB3',
         },
       },
       fontFamily: {
@@ -39,5 +46,9 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
 } 
