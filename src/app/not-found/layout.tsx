@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Oswald, Roboto } from "next/font/google";
 import "../globals.css";
 import "../fix.css";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeReady } from "@/components/ui/theme-ready";
 
 // Import the configuration file to disable static generation
 import "./config"
@@ -42,9 +44,16 @@ export default function NotFoundLayout({
         <meta name="theme-color" content="#FFFFFF" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${oswald.variable} ${roboto.variable} font-body antialiased min-h-screen bg-background text-foreground`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ThemeReady>
+            {children}
+          </ThemeReady>
+        </ThemeProvider>
       </body>
     </html>
   );

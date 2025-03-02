@@ -5,6 +5,7 @@ import "./fix.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ThemeReady } from "@/components/ui/theme-ready";
 // Import the disable-static-generation file to disable static generation for the entire app
 import "./disable-static-generation";
 
@@ -61,14 +62,19 @@ export default function RootLayout({
         <meta name="theme-color" content="#FFFFFF" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${oswald.variable} ${roboto.variable} font-body antialiased min-h-screen bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1 main-content">{children}</main>
-            <Footer />
-          </div>
+          <ThemeReady>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1 main-content">{children}</main>
+              <Footer />
+            </div>
+          </ThemeReady>
         </ThemeProvider>
       </body>
     </html>

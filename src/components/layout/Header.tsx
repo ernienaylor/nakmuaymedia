@@ -80,8 +80,6 @@ const navItems = [
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-  const [searchExpanded, setSearchExpanded] = React.useState(false)
-  const searchInputRef = React.useRef<HTMLInputElement>(null)
   const { isDark } = useTheme()
 
   // Handle scroll effect
@@ -98,85 +96,72 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Handle search expansion
-  const toggleSearch = () => {
-    setSearchExpanded(!searchExpanded)
-    if (!searchExpanded) {
-      setTimeout(() => {
-        searchInputRef.current?.focus()
-      }, 200)
-    }
-  }
-
-  // Close search when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node
-      const searchContainer = document.getElementById('search-container')
-      if (searchContainer && !searchContainer.contains(target) && searchExpanded) {
-        setSearchExpanded(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [searchExpanded])
-
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-200 header-container",
-        {
-          "bg-background/80 backdrop-blur-md shadow-sm": isScrolled,
-          "bg-background": !isScrolled,
-        }
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center">
-          <Logo size="large" className="logo" />
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
-          {navItems.map((item) => (
-            <NavItem key={item.title} item={item} />
-          ))}
-        </nav>
-
-        <div className="flex items-center space-x-2">
-          <ModeToggle />
+    <header className="bg-secondary text-white shadow-md">
+      <div className="container mx-auto px-4">
+        <nav className="flex items-center justify-between flex-wrap py-4">
+          <div className="flex items-center flex-shrink-0 mr-6">
+            <Link href="/" className="font-heading text-2xl md:text-3xl font-bold uppercase tracking-tight hover:text-accent transition-colors duration-300">
+              Nak Muay Media
+            </Link>
+          </div>
           
           {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
-        </div>
+          <div className="block lg:hidden">
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="flex items-center px-3 py-2 border rounded text-white border-white hover:text-accent hover:border-accent"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-3 w-3" />
+              ) : (
+                <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <title>Menu</title>
+                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                </svg>
+              )}
+            </button>
+          </div>
+          
+          {/* Navigation links */}
+          <div className={`w-full ${mobileMenuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:w-auto`}>
+            <div className="text-sm lg:flex-grow">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.title}
+                  href={item.href} 
+                  className="block mt-4 lg:inline-block lg:mt-0 hover:text-accent mr-6"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            <div className="mt-4 lg:mt-0">
+              <ModeToggle />
+            </div>
+          </div>
+        </nav>
       </div>
-
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu md:hidden">
-          <div className="container mx-auto py-4">
-            <MobileNavigation
-              items={navItems}
-              onClose={() => setMobileMenuOpen(false)}
-            />
+      
+      {/* Submenu */}
+      <div className="bg-white text-secondary py-2 shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap">
+            <Link href="/news/all" className="mr-4 py-1 text-primary hover:text-primary-dark">
+              All News
+            </Link>
+            <Link href="/events/all" className="mr-4 py-1 text-primary hover:text-primary-dark">
+              All Events
+            </Link>
+            <Link href="/fighters/all" className="mr-4 py-1 text-primary hover:text-primary-dark">
+              All Fighters
+            </Link>
+            <Link href="/videos/all" className="mr-4 py-1 text-primary hover:text-primary-dark">
+              All Videos
+            </Link>
           </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }
@@ -249,7 +234,7 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
               <Link
                 key={subItem.title}
                 href={subItem.href}
-                className="flex items-center w-full rounded-md p-2 text-sm hover:bg-accent/10 hover:text-accent transition-colors"
+                className="flex items-center w-full rounded-md p-2 text-sm hover:bg-accent/10 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {subItem.title}
@@ -265,7 +250,7 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
   return (
     <Link
       href={item.href}
-      className="px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent nav-item nav-link"
+      className="flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent nav-link"
     >
       {item.title}
     </Link>
@@ -273,84 +258,71 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
 }
 
 // Mobile Navigation Component
-function MobileNavigation({ 
-  items, 
-  onClose 
-}: { 
-  items: typeof navItems,
+function MobileNavigation({
+  items,
+  onClose,
+}: {
+  items: typeof navItems
   onClose: () => void
 }) {
-  return (
-    <nav className="space-y-6">
-      {items.map((item, index) => (
-        <MobileNavItem 
-          key={item.title} 
-          item={item} 
-          index={index}
-          onItemClick={onClose}
-        />
-      ))}
-    </nav>
-  )
-}
+  const [openItem, setOpenItem] = React.useState<string | null>(null)
 
-// Mobile Navigation Item Component
-function MobileNavItem({ 
-  item, 
-  index,
-  onItemClick 
-}: { 
-  item: typeof navItems[0],
-  index: number,
-  onItemClick: () => void
-}) {
-  const [isOpen, setIsOpen] = React.useState(false)
+  const toggleItem = (title: string) => {
+    setOpenItem(openItem === title ? null : title)
+  }
 
   return (
-    <div className="animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-      <div className="flex items-center justify-between">
-        <Link
-          href={item.href}
-          className="text-xl font-heading font-semibold tracking-wide transition-colors hover:text-accent"
-          onClick={onItemClick}
-        >
-          {item.title}
-        </Link>
-        
-        {item.items && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Collapse" : "Expand"}
-            className="h-8 w-8"
-          >
-            <ChevronDown className={cn(
-              "h-4 w-4 transition-transform duration-200",
-              isOpen ? "rotate-180" : ""
-            )} />
-          </Button>
-        )}
-      </div>
-      
-      {/* Subitems */}
-      {item.items && (
-        <div className={cn(
-          "mt-2 ml-4 space-y-2 overflow-hidden transition-all duration-300",
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        )}>
-          {item.items.map((subItem, subIndex) => (
+    <div className="grid gap-2 p-2">
+      {items.map((item) => (
+        <div key={item.title} className="border-b border-border/50 pb-2">
+          {item.items ? (
+            <>
+              <button
+                onClick={() => toggleItem(item.title)}
+                className="flex items-center justify-between w-full p-2 text-left"
+              >
+                <span className="font-medium">{item.title}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    openItem === item.title ? "rotate-180" : ""
+                  )}
+                />
+              </button>
+
+              {openItem === item.title && (
+                <div className="mt-1 ml-4 grid gap-1">
+                  <Link
+                    href={item.href}
+                    className="p-2 text-sm font-medium text-accent"
+                    onClick={onClose}
+                  >
+                    All {item.title}
+                  </Link>
+                  {item.items.map((subItem) => (
+                    <Link
+                      key={subItem.title}
+                      href={subItem.href}
+                      className="p-2 text-sm"
+                      onClick={onClose}
+                    >
+                      {subItem.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
             <Link
-              key={subItem.title}
-              href={subItem.href}
-              className="block py-2 text-base text-muted-foreground transition-all duration-200 hover:text-accent hover:translate-x-1"
-              onClick={onItemClick}
+              href={item.href}
+              className="block p-2 font-medium"
+              onClick={onClose}
             >
-              {subItem.title}
+              {item.title}
             </Link>
-          ))}
+          )}
         </div>
-      )}
+      ))}
     </div>
   )
 } 
