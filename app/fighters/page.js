@@ -10,7 +10,7 @@ export default function FightersPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Muay Thai Fighters</h1>
-      <p className="text-lg text-neutral-700 mb-8">
+      <p className="text-lg text-gray-700 mb-8">
         Profiles of top Muay Thai fighters from around the world, including records, achievements, and fighting styles.
       </p>
       
