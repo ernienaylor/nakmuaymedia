@@ -12,21 +12,37 @@ This error occurred because the static generation process was trying to render c
 
 ## Solution
 
-We implemented a completely standalone approach for the not-found pages to fix the issue:
+We implemented a comprehensive approach to fix the issue:
 
-1. **Created a standalone not-found page**: Updated `src/app/not-found.tsx` to use inline styles instead of Tailwind CSS classes and UI components.
+1. **Created a standalone not-found page**: Updated `src/app/not-found.tsx` to use inline styles and removed the "use client" directive to make it a server component.
 
 2. **Updated the 404 page**: Applied the same standalone approach to `src/pages/404.tsx`.
 
-3. **Removed UI component dependencies**: Eliminated imports of UI components like `Button` that might internally use the theme context.
+3. **Disabled static generation**: Updated Next.js configuration to disable static generation for the not-found page:
+   - Set `output: 'standalone'` in `next.config.js`
+   - Added `unstable_excludeFiles` to exclude not-found and 404 pages
+   - Created special configuration files for the not-found page
+   - Added environment variables to disable static generation
 
-## Key Changes
+4. **Added special route handling**: Created a route handler and middleware to ensure the not-found page is not statically generated.
 
-1. **Inline styles instead of components**: Used inline styles for all styling to avoid dependencies on external components or CSS.
+5. **Updated Vercel configuration**: Modified `vercel.json` to handle 404 pages properly.
 
-2. **Simplified HTML structure**: Created a basic layout with header, main content, and footer using standard HTML elements.
+## Key Files Created/Modified
 
-3. **CSS variables with fallbacks**: Used CSS variables with fallbacks (e.g., `var(--background, white)`) to ensure the page looks good even without the theme context.
+1. **Configuration Files**:
+   - `next.config.js`: Added configuration to disable static generation
+   - `vercel.json`: Added custom routes for 404 pages
+   - `.env.production`: Added environment variables
+
+2. **Special Handlers**:
+   - `src/app/not-found.config.js`: Configuration for the not-found page
+   - `src/app/not-found/route.js`: Route handler for the not-found page
+   - `src/middleware.js`: Middleware to handle 404 pages
+
+3. **Page Files**:
+   - `src/app/not-found.tsx`: Updated to be a server component
+   - `src/pages/404.tsx`: Updated to use inline styles
 
 ## Testing
 

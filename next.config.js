@@ -76,6 +76,10 @@ const nextConfig = {
   async rewrites() {
     return [];
   },
+  // Disable static generation for specific pages
+  output: 'standalone',
+  // Configure which pages should not be statically generated
+  unstable_excludeFiles: ['**/not-found.js', '**/not-found.js.map', '**/404.js', '**/404.js.map'],
 };
 
 // Add bundle analyzer in analyze mode

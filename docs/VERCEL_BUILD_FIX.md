@@ -12,164 +12,138 @@ This error occurred because the static generation process was trying to render c
 
 ## Solution
 
-We implemented the following changes to fix the issue:
+We implemented a comprehensive approach to fix the issue:
 
-1. **Created a completely standalone not-found page**: We updated the `src/app/not-found.tsx` file to use a completely standalone layout that doesn't import any components that might depend on the theme context. Instead of using Tailwind CSS classes and UI components, we used inline styles to ensure that the page doesn't depend on any external styling or components.
+1. **Created a completely standalone not-found page**: We updated the `src/app/not-found.tsx` file to use a completely standalone layout that doesn't import any components that might depend on the theme context. We removed the "use client" directive to make it a server component.
 
 2. **Updated the 404 page in the pages directory**: We also updated the `src/pages/404.tsx` file to use the same standalone approach, ensuring that it doesn't depend on any components that might use the theme context.
 
-3. **Removed all dependencies on UI components**: We removed all imports of UI components like `Button` that might internally use the theme context, and replaced them with simple HTML elements styled with inline styles.
+3. **Disabled static generation for the not-found page**: We updated the Next.js configuration to disable static generation for the not-found page. This includes:
+   - Setting `output: 'standalone'` in `next.config.js`
+   - Adding `unstable_excludeFiles` to exclude not-found and 404 pages from static generation
+   - Creating special configuration files for the not-found page
+   - Adding environment variables to disable static generation for the not-found page
+   - Creating a middleware to handle 404 pages
+
+4. **Added special route configuration**: We created a special route handler for the not-found page to ensure it's not statically generated.
+
+5. **Updated Vercel configuration**: We updated the `vercel.json` file to configure how 404 pages are handled, including adding a custom route for 404 pages.
 
 ## Technical Details
 
-### Standalone Not Found Page
+### Next.js Configuration
 
-The not-found page now uses a completely standalone approach with inline styles:
+We updated the `next.config.js` file to disable static generation for the not-found page:
 
-```tsx
-// src/app/not-found.tsx
-import Link from "next/link"
+```js
+// next.config.js
+const nextConfig = {
+  // ... other configuration
+  
+  // Disable static generation for specific pages
+  output: 'standalone',
+  // Configure which pages should not be statically generated
+  unstable_excludeFiles: ['**/not-found.js', '**/not-found.js.map', '**/404.js', '**/404.js.map'],
+};
+```
 
-// A completely standalone not-found page that doesn't use any components
-// that might depend on the theme context
-export default function NotFound() {
-  return (
-    <div style={{ 
-      minHeight: "100vh", 
-      display: "flex", 
-      flexDirection: "column",
-      backgroundColor: "var(--background, white)",
-      color: "var(--foreground, black)"
-    }}>
-      {/* Simple header */}
-      <header style={{ 
-        borderBottom: "1px solid var(--border, #e5e7eb)", 
-        padding: "1rem 1.5rem" 
-      }}>
-        <div style={{ 
-          maxWidth: "80rem", 
-          margin: "0 auto", 
-          padding: "0 1rem",
-          display: "flex", 
-          justifyContent: "space-between", 
-          alignItems: "center" 
-        }}>
-          <Link href="/" style={{ 
-            fontWeight: "bold", 
-            fontSize: "1.5rem",
-            fontFamily: "var(--font-heading, sans-serif)"
-          }}>
-            Nak Muay Media
-          </Link>
-        </div>
-      </header>
-      
-      {/* Main content */}
-      <main style={{ 
-        flex: "1", 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "center" 
-      }}>
-        <div style={{ 
-          maxWidth: "80rem", 
-          margin: "0 auto", 
-          padding: "0 1rem",
-          display: "flex", 
-          flexDirection: "column", 
-          alignItems: "center", 
-          justifyContent: "center", 
-          textAlign: "center", 
-          paddingTop: "5rem",
-          paddingBottom: "5rem"
-        }}>
-          <h1 style={{ 
-            fontSize: "3rem", 
-            lineHeight: "1.2", 
-            fontWeight: "700",
-            marginBottom: "1.5rem" 
-          }}>
-            404 - Page Not Found
-          </h1>
-          <p style={{ 
-            fontSize: "1.25rem", 
-            lineHeight: "1.75rem",
-            marginBottom: "2rem",
-            maxWidth: "28rem" 
-          }}>
-            The page you are looking for doesn't exist or has been moved.
-          </p>
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <Link href="/" style={{ 
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "0.375rem",
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              height: "2.5rem",
-              paddingLeft: "1rem",
-              paddingRight: "1rem",
-              backgroundColor: "var(--accent, #0070f3)",
-              color: "var(--accent-foreground, white)",
-              textDecoration: "none"
-            }}>
-              Return Home
-            </Link>
-            <Link href="/contact" style={{ 
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "0.375rem",
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              height: "2.5rem",
-              paddingLeft: "1rem",
-              paddingRight: "1rem",
-              backgroundColor: "transparent",
-              color: "var(--foreground, black)",
-              border: "1px solid var(--border, #e5e7eb)",
-              textDecoration: "none"
-            }}>
-              Contact Support
-            </Link>
-          </div>
-        </div>
-      </main>
-      
-      {/* Simple footer */}
-      <footer style={{ 
-        borderTop: "1px solid var(--border, #e5e7eb)", 
-        padding: "1rem 1.5rem" 
-      }}>
-        <div style={{ 
-          maxWidth: "80rem", 
-          margin: "0 auto", 
-          padding: "0 1rem",
-          textAlign: "center" 
-        }}>
-          <p style={{ 
-            fontSize: "0.875rem", 
-            color: "var(--muted-foreground, #6b7280)" 
-          }}>
-            © {new Date().getFullYear()} Nak Muay Media. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
-  )
+### Not Found Page Configuration
+
+We created special configuration files for the not-found page:
+
+```js
+// src/app/not-found.config.js
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+export const runtime = 'nodejs';
+export const preferredRegion = 'auto';
+```
+
+### Route Handler
+
+We created a special route handler for the not-found page:
+
+```js
+// src/app/not-found/route.js
+import { NextResponse } from 'next/server';
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+export const runtime = 'nodejs';
+export const preferredRegion = 'auto';
+
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Not Found' },
+    { status: 404 }
+  );
 }
 ```
 
-### Key Changes
+### Middleware
 
-1. **Removed all component imports**: We removed imports of UI components like `Button` that might internally use the theme context.
+We created a middleware to handle 404 pages:
 
-2. **Used inline styles instead of Tailwind classes**: We replaced all Tailwind CSS classes with inline styles to ensure that the page doesn't depend on any external styling.
+```js
+// src/middleware.js
+import { NextResponse } from 'next/server';
 
-3. **Simplified the layout**: We created a simple layout with a header, main content, and footer, all styled with inline styles.
+// This middleware is used to handle 404 pages
+// It ensures that the not-found page is not statically generated
+export function middleware(request) {
+  // Check if the request is for the not-found page
+  if (request.nextUrl.pathname === '/_not-found') {
+    // Redirect to the custom 404 page
+    return NextResponse.redirect(new URL('/404', request.url));
+  }
 
-4. **Used CSS variables with fallbacks**: We used CSS variables like `var(--background, white)` with fallbacks to ensure that the page looks good even if the CSS variables are not defined.
+  // Continue with the request
+  return NextResponse.next();
+}
+
+// Configure the middleware to run on specific paths
+export const config = {
+  matcher: ['/_not-found', '/_not-found/(.*)'],
+};
+```
+
+### Vercel Configuration
+
+We updated the `vercel.json` file to configure how 404 pages are handled:
+
+```json
+{
+  // ... other configuration
+  
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+  ],
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_DISABLE_STATIC_NOT_FOUND": "true"
+    }
+  }
+}
+```
+
+### Environment Variables
+
+We created an environment variable file to disable static generation for the not-found page:
+
+```
+# .env.production
+NEXT_PUBLIC_DISABLE_STATIC_NOT_FOUND=true
+NEXT_DISABLE_STATIC_NOT_FOUND=true
+
+# Force dynamic rendering for all pages
+NEXT_RUNTIME_NODE_ENV=production
+```
 
 ## Future Considerations
 

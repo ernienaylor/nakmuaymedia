@@ -31,5 +31,14 @@
         }
       ]
     }
-  ]
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+  ],
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_DISABLE_STATIC_NOT_FOUND": "true"
+    }
+  }
 } 

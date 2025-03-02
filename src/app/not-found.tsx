@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 
 // A completely standalone not-found page that doesn't use any components
