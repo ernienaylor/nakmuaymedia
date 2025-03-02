@@ -1,3 +1,4 @@
+// This file is being deleted to resolve conflicts between Pages Router and App Router
 import '../styles/globals.css';
 import Head from 'next/head';
 import Layout from '../components/Layout';
