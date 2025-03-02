@@ -6,24 +6,19 @@ import Footer from '@/components/layout/Footer';
 // Define fonts
 const roboto = Roboto({
   subsets: ['latin'],
-  display: 'swap',
   weight: ['300', '400', '500', '700'],
   variable: '--font-roboto',
 });
 
 const oswald = Oswald({
   subsets: ['latin'],
-  display: 'swap',
   weight: ['400', '500', '600', '700'],
   variable: '--font-oswald',
 });
 
 export const metadata = {
-  title: {
-    default: 'Nak Muay Media | Your Ringside Seat to Muay Thai Action',
-    template: '%s | Nak Muay Media',
-  },
-  description: 'Your source for Muay Thai news, fighter profiles, technique breakdowns, and event coverage.',
+  title: 'Nak Muay Media | Muay Thai News, Fighters, and Events',
+  description: 'The premier destination for Muay Thai news, fighter profiles, and event coverage from around the world.',
   keywords: ['Muay Thai', 'kickboxing', 'martial arts', 'combat sports', 'fighting', 'MMA', 'Thailand'],
   openGraph: {
     title: 'Nak Muay Media | Your Ringside Seat to Muay Thai Action',
@@ -51,7 +46,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${roboto.variable} ${oswald.variable}`}>
-      <body className="flex flex-col min-h-screen">
+      <body className="min-h-screen bg-gray-50 text-gray-900">
         <Header />
         <main className="flex-grow">
           {children}
