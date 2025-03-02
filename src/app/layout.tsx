@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Roboto } from "next/font/google";
+import { Oswald, Roboto } from "next/font/google";
 import "./globals.css";
 import "./fix.css";
 import { Header } from "@/components/layout/Header";
@@ -12,11 +12,11 @@ import "./disable-static-generation";
 export const dynamic = 'force-dynamic';
 
 // Define fonts with proper weights and subsets
-const montserrat = Montserrat({ 
+const oswald = Oswald({ 
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-oswald",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "700"],
 });
 
 const roboto = Roboto({ 
@@ -62,7 +62,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
-      <body className={`${montserrat.variable} ${roboto.variable} font-body antialiased min-h-screen bg-background text-foreground`}>
+      <body className={`${oswald.variable} ${roboto.variable} font-body antialiased min-h-screen bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div className="flex min-h-screen flex-col">
             <Header />
