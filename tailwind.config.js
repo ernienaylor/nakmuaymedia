@@ -33,17 +33,6 @@ module.exports = {
           light: '#FFECB3',
         },
       },
-      fontFamily: {
-        sans: ['var(--font-roboto)', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        heading: ['var(--font-oswald)', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-      },
-      borderRadius: {
-        DEFAULT: '0.5rem',
-      },
-      boxShadow: {
-        card: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        hover: '0 6px 12px rgba(0, 0, 0, 0.15)',
-      },
     },
   },
   plugins: [

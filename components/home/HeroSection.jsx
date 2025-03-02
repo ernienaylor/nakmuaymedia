@@ -5,7 +5,7 @@ export default function HeroSection({ title, subtitle }) {
     <section className="py-12 md:py-20 bg-white border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {title || "Your Ringside Seat to Muay Thai Action"}
           </h1>
           <p className="text-xl text-gray-700 mb-8">
