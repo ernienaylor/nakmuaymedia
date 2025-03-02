@@ -3,7 +3,7 @@ export const metadata = {
   description: 'Upcoming and past Muay Thai events, fight cards, and results from around the world.',
 };
 
-import EventsCalendar from '@/components/events/EventsCalendar.js';
+import EventsCalendar from '@/components/events/EventsCalendar.jsx';
 import { upcomingEvents } from '@/lib/data';
 
 export default function EventsPage() {

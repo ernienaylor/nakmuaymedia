@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import HeroSection from '@/components/home/HeroSection.js';
-import FeaturedFighter from '@/components/home/FeaturedFighter.js';
-import TopStories from '@/components/home/TopStories.js';
-import UpcomingEvents from '@/components/home/UpcomingEvents.js';
-import FeaturedMedia from '@/components/home/FeaturedMedia.js';
-import NewsletterSignup from '@/components/home/NewsletterSignup.js';
-import NewsGrid from '@/components/news/NewsGrid.js';
+import HeroSection from '@/components/home/HeroSection.jsx';
+import FeaturedFighter from '@/components/home/FeaturedFighter.jsx';
+import TopStories from '@/components/home/TopStories.jsx';
+import UpcomingEvents from '@/components/home/UpcomingEvents.jsx';
+import FeaturedMedia from '@/components/home/FeaturedMedia.jsx';
+import NewsletterSignup from '@/components/home/NewsletterSignup.jsx';
+import NewsGrid from '@/components/news/NewsGrid.jsx';
 
 // Sample data - In a real app, this would come from an API or CMS
 import { featuredFighter, topStories, upcomingEvents, featuredVideo, latestPodcast } from '@/lib/data';

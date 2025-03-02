@@ -78,9 +78,17 @@ const nextConfig = {
   },
   // Disable static generation for specific pages
   output: 'standalone',
-  // Configure webpack to resolve .js extensions for .jsx files
-  webpack(config) {
-    config.resolve.extensions = ['.js', '.jsx', '.json', ...config.resolve.extensions];
+  // Configure webpack to properly resolve .jsx files
+  webpack: (config) => {
+    // Explicitly set the order of extensions to check
+    config.resolve.extensions = ['.jsx', '.js', '.json', ...config.resolve.extensions.filter(ext => ext !== '.js' && ext !== '.jsx' && ext !== '.json')];
+    
+    // Add additional resolver plugins if needed
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': __dirname,  // Ensure @ alias points to the root directory
+    };
+    
     return config;
   },
 };

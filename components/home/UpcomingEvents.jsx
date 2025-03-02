@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function UpcomingEvents({ events }) {
+export default function UpcomingEvents({ events = [] }) {
   const mainEvent = events[0]; // First event is featured
   const otherEvents = events.slice(1); // Rest are shown in a grid
   
