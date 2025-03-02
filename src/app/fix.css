@@ -2,6 +2,7 @@
 .nav-item {
   display: inline-flex;
   align-items: center;
+  position: relative;
 }
 
 /* Fix for dropdown menus */
@@ -13,8 +14,8 @@
   min-width: 14rem;
   padding: 0.5rem;
   margin-top: 0.25rem;
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card, var(--fallback-card)));
+  border: 1px solid hsl(var(--border, var(--fallback-border)));
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -36,7 +37,7 @@
   right: 0;
   bottom: 0;
   z-index: 100;
-  background-color: hsla(var(--background), 0.95);
+  background-color: hsla(var(--background, var(--fallback-background)), 0.95);
   backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
@@ -48,13 +49,20 @@
   font-family: var(--font-montserrat);
   font-weight: 700;
   font-size: 1.5rem;
-  color: hsl(var(--accent));
+  color: hsl(var(--accent, var(--fallback-accent)));
   letter-spacing: -0.025em;
   transition: transform 0.2s ease;
 }
 
 .logo:hover {
   transform: scale(1.05);
+}
+
+/* Logo text specific fix */
+.logo-text {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
 }
 
 /* Fix for header spacing */
@@ -65,6 +73,7 @@
   justify-content: space-between;
   padding: 0 1rem;
   transition: height 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: 1px solid hsla(var(--border, var(--fallback-border)), 0.1);
 }
 
 @media (min-width: 768px) {
@@ -136,6 +145,8 @@
 .home-section {
   background-color: hsl(var(--background, var(--fallback-background)));
   color: hsl(var(--foreground, var(--fallback-foreground)));
+  position: relative;
+  z-index: 1;
 }
 
 .home-section.neutral-light {
@@ -153,6 +164,36 @@
 .accent-fix {
   background-color: hsl(var(--accent, var(--fallback-accent)));
   color: hsl(var(--accent-foreground, var(--fallback-accent-foreground)));
+}
+
+/* Fix for featured stories section */
+.featured-stories-heading {
+  color: hsl(var(--foreground, var(--fallback-foreground)));
+  font-weight: 700;
+}
+
+.featured-article-title {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.featured-article-excerpt {
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.featured-article-meta {
+  color: rgba(255,255,255,0.8);
+}
+
+.secondary-article-card {
+  border: 1px solid hsl(var(--border, var(--fallback-border)));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.secondary-article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Animations */

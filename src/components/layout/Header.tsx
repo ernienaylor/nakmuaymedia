@@ -185,6 +185,7 @@ export function Header() {
 function NavItem({ item }: { item: (typeof navItems)[number] }) {
   const [isOpen, setIsOpen] = React.useState(false)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
+  const { isDark } = useTheme()
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -212,6 +213,9 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
               ? "text-accent" 
               : "hover:text-accent focus:text-accent"
           )}
+          style={{
+            color: isOpen ? `hsl(var(--accent, ${isDark ? '358 70% 50%' : '358 70% 41%'}))` : 'inherit'
+          }}
         >
           {item.title}
           <ChevronDown className={cn(
@@ -231,7 +235,7 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
             {/* Main Category Link */}
             <Link
               href={item.href}
-              className="flex items-center w-full rounded-md bg-accent text-accent-foreground p-3 text-sm font-medium hover:bg-accent/90 transition-colors"
+              className="flex items-center w-full rounded-md bg-accent accent-fix p-3 text-sm font-medium hover:bg-accent/90 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               All {item.title}
@@ -257,11 +261,11 @@ function NavItem({ item }: { item: (typeof navItems)[number] }) {
     )
   }
 
-  // If item has no subitems, render simple link
+  // If no subitems, render simple link
   return (
     <Link
       href={item.href}
-      className="nav-item px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent"
+      className="px-3 py-2 text-sm font-medium rounded-md transition-colors hover:text-accent focus:text-accent nav-item"
     >
       {item.title}
     </Link>

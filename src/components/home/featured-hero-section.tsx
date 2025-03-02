@@ -103,7 +103,7 @@ export function FeaturedHeroSection({
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-4">
             <div className="h-1 w-8 bg-accent accent-fix rounded-full" />
-            <h2 className="text-lg font-heading font-bold uppercase tracking-wider">Featured Stories</h2>
+            <h2 className="text-lg font-heading font-bold uppercase tracking-wider featured-stories-heading">Featured Stories</h2>
           </div>
         </div>
         
@@ -136,16 +136,16 @@ export function FeaturedHeroSection({
                       {mainArticle.category}
                     </Badge>
                     
-                    <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-3 tracking-tight leading-tight">
+                    <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 tracking-tight leading-tight featured-article-title">
                       {mainArticle.title}
                     </h2>
                     
-                    <p className="text-white/90 mb-4 line-clamp-2 md:line-clamp-3 max-w-3xl">
+                    <p className="mb-4 line-clamp-2 md:line-clamp-3 max-w-3xl featured-article-excerpt">
                       {mainArticle.excerpt}
                     </p>
                     
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center text-white/70 text-sm">
+                      <div className="flex items-center text-sm featured-article-meta">
                         <Clock className="h-4 w-4 mr-1" />
                         <span>{mainArticle.readTime}</span>
                         <span className="mx-2">•</span>
@@ -173,7 +173,7 @@ export function FeaturedHeroSection({
               <Link
                 key={article.id}
                 href={`/article/${article.slug}`}
-                className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full animate-fade-in"
+                className="group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full animate-fade-in secondary-article-card card-fix"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative aspect-video overflow-hidden rounded-t-lg">
@@ -189,7 +189,7 @@ export function FeaturedHeroSection({
                   />
                 </div>
                 
-                <div className="flex flex-col flex-grow p-4 border-b border-x rounded-b-lg border-border/60 card-fix">
+                <div className="flex flex-col flex-grow p-4 rounded-b-lg">
                   <Badge 
                     variant="outline" 
                     className="self-start mb-2 text-xs font-medium text-accent border-accent/30"
