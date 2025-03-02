@@ -14,22 +14,24 @@ export default function NewsletterSignup() {
     setError('');
     
     try {
-      // In a real app, you'd send this to your API
-      // await fetch('/api/newsletter', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ email }),
-      // });
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
       
       setIsSuccess(true);
       setEmail('');
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError(err.message || 'Something went wrong. Please try again.');
       console.error(err);
     } finally {
       setIsSubmitting(false);

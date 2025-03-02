@@ -1,10 +1,10 @@
+import ProductGrid from '@/components/shop/ProductGrid';
+import { shopProducts } from '@/lib/data';
+
 export const metadata = {
   title: 'Shop | Nak Muay Media',
   description: 'Shop for Nak Muay Media merchandise and Muay Thai gear.',
 };
-
-import ProductGrid from '@/components/shop/ProductGrid';
-import { shopProducts } from '@/lib/data';
 
 export default function ShopPage() {
   return (

@@ -1,10 +1,10 @@
+import PodcastEpisodeList from '@/components/podcast/PodcastEpisodeList';
+import { allPodcasts } from '@/lib/data';
+
 export const metadata = {
   title: 'Podcast | Nak Muay Media',
   description: 'Listen to the Nak Muay Media podcast featuring interviews with fighters, coaches, and industry insiders.',
 };
-
-import PodcastEpisodeList from '@/components/podcast/PodcastEpisodeList';
-import { allPodcasts } from '@/lib/data';
 
 export default function PodcastPage() {
   return (
