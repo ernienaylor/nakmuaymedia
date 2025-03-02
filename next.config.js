@@ -89,6 +89,17 @@ const nextConfig = {
         source: '/_not-found',
         destination: '/not-found',
       },
+      // Handle 404 pages
+      {
+        source: '/:path*',
+        destination: '/not-found',
+        missing: [
+          {
+            type: 'page',
+            value: 'missing',
+          },
+        ],
+      },
     ];
   },
   // Disable static generation for specific pages
