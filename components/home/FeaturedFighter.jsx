@@ -1,38 +1,28 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function FeaturedFighter({ fighter }) {
+export default function FeaturedFighter({ fighter = {} }) {
   return (
-    <div className="bg-gradient-to-r from-secondary to-secondary-light rounded-lg overflow-hidden shadow-lg text-white">
+    <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg overflow-hidden shadow-lg text-white">
       <div className="md:flex">
-        <div className="md:w-2/5 relative h-64 md:h-auto">
-          <div className="relative w-full h-full">
-            <Image 
-              src={fighter.image || "/images/placeholder.jpg"} 
-              alt={fighter.name} 
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+        <div className="md:w-2/5 relative">
+          <div className="h-64 md:h-full bg-gray-700"></div>
         </div>
         
         <div className="p-6 md:w-3/5">
-          <h3 className="text-3xl font-heading font-bold uppercase text-accent mb-2">
-            {fighter.name}
+          <h3 className="text-3xl font-bold uppercase text-amber-400 mb-2">
+            {fighter.name || "Featured Fighter"}
           </h3>
           <p className="mb-3">
-            Record: {fighter.record}
+            {fighter.record || "Record: 0-0-0"}
           </p>
-          <p className="mb-6 text-neutral-100">
-            {fighter.bio}
+          <p className="mb-6 text-gray-300">
+            {fighter.bio || "Fighter bio will appear here, describing their fighting style, achievements, and career highlights."}
           </p>
-          <Link 
-            href={`/fighters/${fighter.slug}`} 
-            className="inline-block bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded transition-colors duration-300"
-          >
+          <button className="inline-block bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300">
             Fighter Profile
-          </Link>
+          </button>
         </div>
       </div>
     </div>
