@@ -21,7 +21,7 @@ export default function VideoGrid({ videos = [] }) {
         {videos.length > 0 ? (
           videos.map((video, index) => (
             <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="relative h-48 bg-neutral-200">
+              <div className="relative h-48 bg-black/10">
                 {/* Video thumbnail */}
                 <button 
                   onClick={() => openVideo(video)}
@@ -37,14 +37,14 @@ export default function VideoGrid({ videos = [] }) {
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold mb-1">{video.title || "Video Title"}</h3>
-                <p className="text-sm text-neutral-500 mb-2">{video.duration || "00:00"}</p>
+                <p className="text-sm text-black/50 mb-2">{video.duration || "00:00"}</p>
               </div>
             </div>
           ))
         ) : (
           <div className="col-span-full bg-white rounded-lg shadow-md p-6 text-center">
             <h3 className="text-xl font-bold mb-2">Videos Coming Soon</h3>
-            <p className="text-neutral-600">Check back for fight highlights and technique breakdowns.</p>
+            <p className="text-black/60">Check back for fight highlights and technique breakdowns.</p>
           </div>
         )}
       </div>
@@ -53,15 +53,15 @@ export default function VideoGrid({ videos = [] }) {
       {selectedVideo && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg w-full max-w-4xl">
-            <div className="p-4 border-b border-neutral-200 flex justify-between items-center">
+            <div className="p-4 border-b border-black/10 flex justify-between items-center">
               <h3 className="font-bold">{selectedVideo.title}</h3>
-              <button onClick={closeVideo} className="text-neutral-500 hover:text-neutral-700">
+              <button onClick={closeVideo} className="text-black/50 hover:text-black/70">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="aspect-video bg-neutral-900 flex items-center justify-center">
+            <div className="aspect-video bg-black flex items-center justify-center">
               <p className="text-white">Video player would be embedded here</p>
             </div>
           </div>

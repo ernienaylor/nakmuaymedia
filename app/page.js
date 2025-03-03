@@ -29,13 +29,12 @@ export default function Home() {
       </section>
       
       {/* Top Stories Grid */}
-      <section className="section section-border">
-        <div className="container-custom">
-          <h2 className="section-title">Top Stories</h2>
-          <TopStories stories={topStories} />
-          
-          <div className="text-center mt-10">
-            <Link href="/news" className="btn-outline">
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Latest News</h2>
+          <TopStories />
+          <div className="text-center mt-8">
+            <Link href="/news" className="btn btn-primary">
               View All News
             </Link>
           </div>
@@ -43,13 +42,12 @@ export default function Home() {
       </section>
       
       {/* Upcoming Events Section */}
-      <section className="section section-border bg-neutral-50">
-        <div className="container-custom">
-          <h2 className="section-title">Upcoming Events</h2>
-          <UpcomingEvents events={upcomingEvents} />
-          
-          <div className="text-center mt-10">
-            <Link href="/events" className="btn-outline">
+      <section className="py-12 md:py-16 bg-black/5">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Upcoming Events</h2>
+          <UpcomingEvents />
+          <div className="text-center mt-8">
+            <Link href="/events" className="btn btn-primary">
               View All Events
             </Link>
           </div>
@@ -57,10 +55,15 @@ export default function Home() {
       </section>
       
       {/* Featured Media Section */}
-      <section className="section section-border">
-        <div className="container-custom">
-          <h2 className="section-title">Featured Media</h2>
-          <FeaturedMedia video={featuredVideo} podcast={latestPodcast} />
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Featured Media</h2>
+          <FeaturedMedia />
+          <div className="text-center mt-8">
+            <Link href="/videos" className="btn btn-primary">
+              View All Videos
+            </Link>
+          </div>
         </div>
       </section>
       

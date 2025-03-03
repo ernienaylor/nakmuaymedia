@@ -10,9 +10,9 @@ export default function UpcomingEvents() {
       {displayedEvents.length > 0 ? (
         displayedEvents.map((event, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="p-4 border-b border-neutral-200">
+            <div className="p-4 border-b border-black/10">
               <h3 className="text-lg font-bold">{event.title || "Event Title"}</h3>
-              <p className="text-sm text-neutral-500">{event.date || "Upcoming"}</p>
+              <p className="text-sm text-black/50">{event.date || "Upcoming"}</p>
             </div>
             <div className="p-4">
               <div className="space-y-3">
@@ -20,12 +20,12 @@ export default function UpcomingEvents() {
                   event.bouts.map((bout, boutIndex) => (
                     <div key={boutIndex} className="flex items-center justify-between">
                       <div className="text-sm font-medium">{bout.fighter1 || "Fighter 1"}</div>
-                      <div className="text-xs bg-neutral-100 px-2 py-1 rounded">VS</div>
+                      <div className="text-xs bg-black/5 px-2 py-1 rounded">VS</div>
                       <div className="text-sm font-medium text-right">{bout.fighter2 || "Fighter 2"}</div>
                     </div>
                   ))
                 ) : (
-                  <p className="text-neutral-600 text-sm">Bout details coming soon</p>
+                  <p className="text-black/60 text-sm">Bout details coming soon</p>
                 )}
               </div>
             </div>
@@ -34,7 +34,7 @@ export default function UpcomingEvents() {
       ) : (
         <div className="col-span-full bg-white rounded-lg shadow-md p-6 text-center">
           <h3 className="text-xl font-bold mb-2">Events Coming Soon</h3>
-          <p className="text-neutral-600">Check back for upcoming Muay Thai events.</p>
+          <p className="text-black/60">Check back for upcoming Muay Thai events.</p>
         </div>
       )}
     </div>

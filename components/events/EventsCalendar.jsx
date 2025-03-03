@@ -15,7 +15,7 @@ export default function EventsCalendar({ events = [] }) {
       ) : (
         <div className="bg-white rounded-lg shadow-md p-6 text-center">
           <h3 className="text-xl font-bold mb-2">Events Coming Soon</h3>
-          <p className="text-neutral-600">Check back later for upcoming Muay Thai events.</p>
+          <p className="text-black/60">Check back later for upcoming Muay Thai events.</p>
         </div>
       )}
     </div>
