@@ -31,7 +31,7 @@ export default function Header() {
       pathname.startsWith('/events/')
     );
   };
-  
+
   return (
     <header className="bg-secondary text-white">
       {/* Top bar */}
@@ -175,27 +175,7 @@ export default function Header() {
       )}
 
       {/* Secondary Navigation */}
-      <div className="bg-primary">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex justify-center md:justify-start space-x-6 text-sm">
-            <Link href="/news" className="text-white hover:text-white/80 transition-colors">
-              All News
-            </Link>
-            <Link href="/events" className="text-white hover:text-white/80 transition-colors">
-              All Events
-            </Link>
-            <Link href="/fighters" className="text-white hover:text-white/80 transition-colors">
-              All Fighters
-            </Link>
-            <Link href="/videos" className="text-white hover:text-white/80 transition-colors">
-              All Videos
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Sub-navigation */}
-      {shouldShowSubNav() && <SubNav pathname={pathname} />}
+      {shouldShowSubNav() && <SubNav />}
     </header>
   );
 } 

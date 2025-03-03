@@ -10,19 +10,19 @@ export default function TopStories() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {displayedStories.length > 0 ? (
         displayedStories.map((story, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="h-48 bg-black/10"></div>
+          <div key={index} style={{ backgroundColor: '#ffffff' }} className="rounded-lg shadow-md overflow-hidden">
+            <div className="h-48" style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)' }}></div>
             <div className="p-4">
               <h3 className="text-lg font-bold mb-1">{story.title || "News Article"}</h3>
-              <p className="text-sm text-black/50 mb-2">{story.date || "Recent"}</p>
-              <p className="text-black/70 line-clamp-3">{story.excerpt || "Article excerpt will appear here."}</p>
+              <p style={{ color: 'rgba(0, 0, 0, 0.5)' }} className="text-sm mb-2">{story.date || "Recent"}</p>
+              <p style={{ color: 'rgba(0, 0, 0, 0.7)' }} className="line-clamp-3">{story.excerpt || "Article excerpt will appear here."}</p>
             </div>
           </div>
         ))
       ) : (
-        <div className="col-span-full bg-white rounded-lg shadow-md p-6 text-center">
+        <div className="col-span-full" style={{ backgroundColor: '#ffffff' }} className="rounded-lg shadow-md p-6 text-center">
           <h3 className="text-xl font-bold mb-2">News Coming Soon</h3>
-          <p className="text-black/60">Check back for the latest Muay Thai news and updates.</p>
+          <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>Check back for the latest Muay Thai news and updates.</p>
         </div>
       )}
     </div>

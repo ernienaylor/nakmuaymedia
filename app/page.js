@@ -28,7 +28,7 @@ export default function Home() {
       </section>
       
       {/* Latest News */}
-      <section className="py-12 md:py-16 bg-black/5">
+      <section className="py-12 md:py-16" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         <div className="container mx-auto px-4">
           <h2 className="section-title">LATEST NEWS</h2>
           <TopStories />
@@ -54,7 +54,7 @@ export default function Home() {
       </section>
       
       {/* Featured Media */}
-      <section className="py-12 md:py-16 bg-black/5">
+      <section className="py-12 md:py-16" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         <div className="container mx-auto px-4">
           <h2 className="section-title">FEATURED MEDIA</h2>
           <FeaturedMedia />

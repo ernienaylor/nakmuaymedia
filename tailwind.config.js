@@ -7,6 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        white: '#ffffff',
+        black: '#000000',
+        transparent: 'transparent',
+        current: 'currentColor',
+        
         primary: {
           DEFAULT: '#d32f2f',
           dark: '#b71c1c',
