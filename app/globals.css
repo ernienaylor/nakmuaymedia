@@ -21,7 +21,7 @@
   /* Buttons */
   .btn {
     @apply inline-flex items-center justify-center px-4 py-2 border border-transparent 
-           text-sm font-medium rounded-md shadow-button transition-colors duration-200
+           text-sm font-medium rounded-md shadow-sm transition-colors duration-200
            focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
@@ -38,142 +38,141 @@
   }
 
   .btn-outline {
-    @apply btn bg-transparent border border-current text-primary hover:bg-primary hover:text-white focus:ring-primary;
+    @apply btn bg-transparent border-white text-white hover:bg-white/10 focus:ring-white;
   }
 
-  /* Section styling */
+  /* Sections */
   .section {
-    @apply py-12 md:py-16 lg:py-20;
+    @apply py-12 md:py-16;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-6 md:mb-8 font-heading;
+    @apply text-2xl md:text-3xl font-bold mb-8 text-center;
   }
 
   .section-subtitle {
-    @apply text-xl text-neutral-700 max-w-3xl mx-auto mb-10;
+    @apply text-lg text-black/70 mb-8 max-w-3xl mx-auto text-center;
   }
 
   /* Cards */
   .card {
-    @apply bg-white rounded-lg overflow-hidden shadow-card transition-shadow duration-300 hover:shadow-card-hover;
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 
   .card-body {
-    @apply p-5 md:p-6;
+    @apply p-4;
   }
 
   .card-title {
-    @apply font-heading font-bold text-xl mb-2;
+    @apply text-lg font-bold mb-1;
   }
 
-  /* Fighter card */
+  /* Fighter Card */
   .fighter-card {
-    @apply card relative;
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 
   .fighter-card img {
-    @apply w-full h-48 md:h-56 object-cover;
+    @apply w-full h-48 object-cover object-center;
   }
 
   .fighter-card-content {
-    @apply p-4 md:p-5;
+    @apply p-4;
   }
 
   .fighter-card-name {
-    @apply text-xl font-heading font-bold text-secondary mb-1;
+    @apply text-lg font-bold;
   }
 
   .fighter-card-record {
-    @apply text-sm font-medium text-neutral-500 mb-2;
+    @apply text-sm text-black/50;
   }
 
-  /* Event card */
+  /* Event Card */
   .event-card {
-    @apply card;
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 
   .event-card-header {
-    @apply p-4 md:p-5 border-b border-neutral-200;
+    @apply p-4 border-b border-black/10;
   }
 
   .event-card-title {
-    @apply text-xl font-heading font-bold text-primary;
+    @apply text-lg font-bold;
   }
 
   .event-card-date {
-    @apply text-sm text-neutral-500;
+    @apply text-sm text-black/50;
   }
 
   .event-card-body {
-    @apply p-4 md:p-5;
+    @apply p-4;
   }
 
   .event-card-bout {
-    @apply flex justify-between items-center py-3 border-b border-neutral-200 last:border-0;
+    @apply flex items-center justify-between;
   }
 
   .bout-fighter {
-    @apply text-center w-2/5;
+    @apply flex-1;
   }
 
   .bout-fighter-name {
-    @apply font-heading font-bold;
+    @apply text-sm font-medium;
   }
 
   .bout-fighter-record {
-    @apply text-xs text-neutral-500;
+    @apply text-xs text-black/50;
   }
 
   .bout-vs {
-    @apply font-bold text-primary;
+    @apply text-xs bg-black/5 px-2 py-1 rounded mx-2;
   }
 
-  /* News card */
+  /* News Card */
   .news-card {
-    @apply card flex flex-col h-full;
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 
   .news-card-image {
-    @apply relative w-full h-48 overflow-hidden;
+    @apply w-full h-48 object-cover object-center;
   }
 
   .news-card-category {
-    @apply absolute top-0 left-0 bg-primary text-white text-xs font-bold px-2 py-1 m-3 rounded;
+    @apply text-xs font-medium text-primary uppercase tracking-wider;
   }
 
   .news-card-content {
-    @apply p-4 md:p-5 flex-grow;
+    @apply p-4;
   }
 
   .news-card-title {
-    @apply text-xl font-heading font-bold text-secondary mb-2 leading-tight hover:text-primary transition-colors duration-200;
+    @apply text-lg font-bold mb-1;
   }
 
   .news-card-meta {
-    @apply text-xs text-neutral-500 mb-3;
+    @apply text-sm text-black/50 mb-2;
   }
 
   .news-card-excerpt {
-    @apply text-neutral-700 mb-4 line-clamp-3;
+    @apply text-black/70 line-clamp-3;
   }
 
-  /* Video card */
+  /* Video Card */
   .video-card {
-    @apply card overflow-hidden;
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
   }
 
   .video-card-image {
-    @apply relative w-full;
+    @apply relative h-48 bg-black/10;
   }
 
   .video-thumbnail {
-    @apply w-full h-48 object-cover;
+    @apply absolute inset-0 flex items-center justify-center;
   }
 
   .video-play-button {
-    @apply absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 
-           text-white transition-opacity duration-200 opacity-80 hover:opacity-100;
+    @apply w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center;
   }
 
   .video-card-content {
@@ -181,75 +180,74 @@
   }
 
   .video-card-title {
-    @apply text-lg font-heading font-bold mb-1 leading-tight;
+    @apply text-lg font-bold mb-1;
   }
 
   .video-card-meta {
-    @apply text-xs text-neutral-500;
+    @apply text-sm text-black/50 mb-2;
   }
 
-  /* Form elements */
+  /* Forms */
   .form-group {
     @apply mb-4;
   }
 
   .form-label {
-    @apply block text-sm font-medium text-neutral-700 mb-1;
+    @apply block text-sm font-medium text-black/70 mb-1;
   }
 
   .form-input {
-    @apply block w-full rounded-md border-neutral-300 shadow-sm focus:ring-primary focus:border-primary sm:text-sm;
+    @apply w-full px-3 py-2 border border-black/20 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary;
   }
 
   .form-error {
-    @apply mt-1 text-sm text-primary;
+    @apply text-red-500 text-sm mt-1;
   }
 
   /* Newsletter */
   .newsletter-form {
-    @apply flex flex-col sm:flex-row gap-3 max-w-lg mx-auto;
+    @apply max-w-md mx-auto;
   }
 
   .newsletter-input {
-    @apply flex-grow form-input;
+    @apply w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white/20 placeholder-white/60 focus:outline-none focus:border-white;
   }
 
   .newsletter-button {
-    @apply btn-primary whitespace-nowrap;
+    @apply w-full sm:w-auto bg-white text-secondary hover:bg-white/90 py-2 px-4 rounded-md font-medium transition-colors;
   }
 
-  /* Hero section */
+  /* Hero Section */
   .hero {
-    @apply py-12 md:py-20 lg:py-24 bg-white border-b border-neutral-200;
+    @apply bg-secondary py-16 md:py-24 relative;
   }
 
   .hero-content {
-    @apply max-w-5xl mx-auto text-center;
+    @apply container mx-auto px-4 text-center relative z-10;
   }
 
   .hero-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-4 md:mb-6 leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6;
   }
 
   .hero-subtitle {
-    @apply text-xl md:text-2xl text-neutral-700 max-w-3xl mx-auto mb-8;
+    @apply text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto;
   }
 }
 
-/* Utility classes */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .section-border {
-    @apply border-b border-neutral-200;
+    @apply border-t border-black/10;
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -259,5 +257,17 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-button {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
 } 

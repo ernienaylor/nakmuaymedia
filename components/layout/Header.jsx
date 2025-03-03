@@ -2,20 +2,20 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import SubNav from './SubNav';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-  
-  // Active link style helper
   const isActive = (path) => {
     return pathname === path;
+  };
+  
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
   
   // Determine if we should show the sub-navigation
@@ -33,157 +33,167 @@ export default function Header() {
   };
   
   return (
-    <header className="bg-secondary shadow-header">
-      {/* Top bar with logo and main navigation */}
-      <div className="container-custom">
-        <div className="flex items-center justify-between py-4">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <span className="text-white font-heading text-2xl font-bold tracking-tight">
-                Nak Muay Media
-              </span>
-            </Link>
-          </div>
-          
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="text-white p-2 focus:outline-none"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
-          
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className={`${isActive('/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
-            >
-              Home
-            </Link>
-            <Link
-              href="/news"
-              className={`${isActive('/news') || pathname.startsWith('/news/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
+    <header className="bg-secondary text-white">
+      {/* Top bar */}
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link href="/" className="text-2xl font-bold flex items-center">
+          <span className="text-primary mr-2">Nak Muay</span> Media
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-6">
+          <Link 
+            href="/news" 
+            className={`hover:text-primary transition-colors ${isActive('/news') ? 'text-primary font-medium' : ''}`}
+          >
+            News
+          </Link>
+          <Link 
+            href="/events" 
+            className={`hover:text-primary transition-colors ${isActive('/events') ? 'text-primary font-medium' : ''}`}
+          >
+            Events
+          </Link>
+          <Link 
+            href="/fighters" 
+            className={`hover:text-primary transition-colors ${isActive('/fighters') ? 'text-primary font-medium' : ''}`}
+          >
+            Fighters
+          </Link>
+          <Link 
+            href="/videos" 
+            className={`hover:text-primary transition-colors ${isActive('/videos') ? 'text-primary font-medium' : ''}`}
+          >
+            Videos
+          </Link>
+          <Link 
+            href="/podcast" 
+            className={`hover:text-primary transition-colors ${isActive('/podcast') ? 'text-primary font-medium' : ''}`}
+          >
+            Podcast
+          </Link>
+          <Link 
+            href="/shop" 
+            className={`hover:text-primary transition-colors ${isActive('/shop') ? 'text-primary font-medium' : ''}`}
+          >
+            Shop
+          </Link>
+          <Link 
+            href="/community" 
+            className={`hover:text-primary transition-colors ${isActive('/community') ? 'text-primary font-medium' : ''}`}
+          >
+            Community
+          </Link>
+          <Link 
+            href="/about" 
+            className={`hover:text-primary transition-colors ${isActive('/about') ? 'text-primary font-medium' : ''}`}
+          >
+            About
+          </Link>
+        </nav>
+
+        {/* Theme Toggle Button */}
+        <button className="p-2 rounded-full hover:bg-secondary-light transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+          </svg>
+        </button>
+
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden p-2 rounded-md hover:bg-secondary-light transition-colors"
+          onClick={toggleMobileMenu}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden bg-secondary-light">
+          <div className="container mx-auto px-4 py-3 flex flex-col space-y-3">
+            <Link 
+              href="/news" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/news') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               News
             </Link>
-            <Link
-              href="/videos"
-              className={`${isActive('/videos') || pathname.startsWith('/videos/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
-            >
-              Videos
-            </Link>
-            <Link
-              href="/podcast"
-              className={`${isActive('/podcast') || pathname.startsWith('/podcast/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
-            >
-              Podcast
-            </Link>
-            <Link
-              href="/events"
-              className={`${isActive('/events') || pathname.startsWith('/events/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
+            <Link 
+              href="/events" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/events') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Events
             </Link>
-            <Link
-              href="/fighters"
-              className={`${isActive('/fighters') || pathname.startsWith('/fighters/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
+            <Link 
+              href="/fighters" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/fighters') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Fighters
             </Link>
-            <Link
-              href="/shop"
-              className={`${isActive('/shop') || pathname.startsWith('/shop/') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
-            >
-              Shop
-            </Link>
-            <Link
-              href="/about"
-              className={`${isActive('/about') ? 'text-primary' : 'text-white'} hover:text-primary-light font-medium transition-colors duration-200`}
-            >
-              About
-            </Link>
-          </nav>
-        </div>
-      </div>
-      
-      {/* Mobile navigation dropdown */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden bg-secondary-light`}>
-        <div className="container-custom py-3">
-          <nav className="grid gap-y-3">
-            <Link
-              href="/"
-              className={`${isActive('/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/news"
-              className={`${isActive('/news') || pathname.startsWith('/news/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              News
-            </Link>
-            <Link
-              href="/videos"
-              className={`${isActive('/videos') || pathname.startsWith('/videos/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
+            <Link 
+              href="/videos" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/videos') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Videos
             </Link>
-            <Link
-              href="/podcast"
-              className={`${isActive('/podcast') || pathname.startsWith('/podcast/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
+            <Link 
+              href="/podcast" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/podcast') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Podcast
             </Link>
-            <Link
-              href="/events"
-              className={`${isActive('/events') || pathname.startsWith('/events/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Events
-            </Link>
-            <Link
-              href="/fighters"
-              className={`${isActive('/fighters') || pathname.startsWith('/fighters/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Fighters
-            </Link>
-            <Link
-              href="/shop"
-              className={`${isActive('/shop') || pathname.startsWith('/shop/') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
+            <Link 
+              href="/shop" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/shop') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               Shop
             </Link>
-            <Link
-              href="/about"
-              className={`${isActive('/about') ? 'text-primary' : 'text-white'} hover:text-primary-light px-2 py-1 rounded-md`}
-              onClick={() => setIsMenuOpen(false)}
+            <Link 
+              href="/community" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/community') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Community
+            </Link>
+            <Link 
+              href="/about" 
+              className={`py-2 hover:text-primary transition-colors ${isActive('/about') ? 'text-primary font-medium' : ''}`}
+              onClick={() => setMobileMenuOpen(false)}
             >
               About
             </Link>
-          </nav>
+          </div>
+        </nav>
+      )}
+
+      {/* Secondary Navigation */}
+      <div className="bg-primary">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex justify-center md:justify-start space-x-6 text-sm">
+            <Link href="/news" className="text-white hover:text-white/80 transition-colors">
+              All News
+            </Link>
+            <Link href="/events" className="text-white hover:text-white/80 transition-colors">
+              All Events
+            </Link>
+            <Link href="/fighters" className="text-white hover:text-white/80 transition-colors">
+              All Fighters
+            </Link>
+            <Link href="/videos" className="text-white hover:text-white/80 transition-colors">
+              All Videos
+            </Link>
+          </div>
         </div>
       </div>
-      
+
       {/* Sub-navigation */}
       {shouldShowSubNav() && <SubNav pathname={pathname} />}
     </header>

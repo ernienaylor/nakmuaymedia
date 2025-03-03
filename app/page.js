@@ -6,32 +6,31 @@ import TopStories from '@/components/home/TopStories.jsx';
 import UpcomingEvents from '@/components/home/UpcomingEvents.jsx';
 import FeaturedMedia from '@/components/home/FeaturedMedia.jsx';
 import NewsletterSignup from '@/components/home/NewsletterSignup.jsx';
-import NewsGrid from '@/components/news/NewsGrid.jsx';
 
 // Sample data - In a real app, this would come from an API or CMS
-import { featuredFighter, topStories, upcomingEvents, featuredVideo, latestPodcast } from '@/lib/data';
+import { featuredFighter, topStories, upcomingEvents, featuredVideos } from '@/lib/data';
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
       <HeroSection 
-        title="Your Ringside Seat to <span class='text-primary'>Muay Thai</span> Action"
-        subtitle="The premier destination for Muay Thai news, fighter profiles, and event coverage from around the world."
+        title="WELCOME TO <span class='text-primary'>NAK MUAY</span> MEDIA"
+        subtitle="Your source for Muay Thai news, fighter profiles, and event coverage from around the world."
       />
       
-      {/* Featured Fighter Section */}
-      <section className="section section-border">
-        <div className="container-custom">
-          <h2 className="section-title">Featured Fighter</h2>
+      {/* Featured Fighter */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="section-title">FEATURED FIGHTER</h2>
           <FeaturedFighter fighter={featuredFighter} />
         </div>
       </section>
       
-      {/* Top Stories Grid */}
-      <section className="py-12 md:py-16">
+      {/* Latest News */}
+      <section className="py-12 md:py-16 bg-black/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Latest News</h2>
+          <h2 className="section-title">LATEST NEWS</h2>
           <TopStories />
           <div className="text-center mt-8">
             <Link href="/news" className="btn btn-primary">
@@ -41,10 +40,10 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Upcoming Events Section */}
-      <section className="py-12 md:py-16 bg-black/5">
+      {/* Upcoming Events */}
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Upcoming Events</h2>
+          <h2 className="section-title">UPCOMING EVENTS</h2>
           <UpcomingEvents />
           <div className="text-center mt-8">
             <Link href="/events" className="btn btn-primary">
@@ -54,10 +53,10 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Featured Media Section */}
-      <section className="py-12 md:py-16">
+      {/* Featured Media */}
+      <section className="py-12 md:py-16 bg-black/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Featured Media</h2>
+          <h2 className="section-title">FEATURED MEDIA</h2>
           <FeaturedMedia />
           <div className="text-center mt-8">
             <Link href="/videos" className="btn btn-primary">
@@ -67,7 +66,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Newsletter Signup */}
+      {/* Newsletter */}
       <NewsletterSignup />
     </>
   );
