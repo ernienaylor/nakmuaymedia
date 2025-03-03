@@ -56,16 +56,19 @@ export default function SubNav() {
   const links = getLinks();
   
   return (
-    <div className="bg-primary">
+    <div style={{ backgroundColor: '#d32f2f' }}>
       <div className="container mx-auto px-4 py-2">
         <div className="flex justify-center md:justify-start space-x-6 text-sm overflow-x-auto">
           {links.map((link) => (
             <Link 
               key={link.href} 
               href={link.href} 
-              className={`text-white hover:text-white/80 transition-colors whitespace-nowrap ${
+              className={`transition-colors whitespace-nowrap ${
                 pathname === link.href ? 'font-medium' : ''
               }`}
+              style={{ 
+                color: '#ffffff',
+              }}
             >
               {link.label}
             </Link>

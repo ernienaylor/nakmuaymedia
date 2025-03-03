@@ -15,18 +15,17 @@ export default function HeroSection({ title, subtitle }) {
       
       <div className="container mx-auto px-4 text-center" style={{ position: 'relative', zIndex: 10 }}>
         <h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          style={{ color: '#ffffff' }}
+          className="hero-title"
           dangerouslySetInnerHTML={{ __html: title }}
         ></h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+        <p className="hero-subtitle">
           {subtitle}
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Link href="/news" className="btn btn-primary">
+          <Link href="/news" className="btn-primary">
             Latest News
           </Link>
-          <Link href="/fighters" className="btn btn-outline">
+          <Link href="/fighters" className="btn-outline">
             Fighter Profiles
           </Link>
         </div>

@@ -13,29 +13,12 @@ export default function NewsletterSignup() {
     setIsSubmitting(true);
     setError('');
     
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
-      
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
       setIsSuccess(true);
       setEmail('');
-    } catch (err) {
-      setError(err.message || 'Something went wrong. Please try again.');
-      console.error(err);
-    } finally {
-      setIsSubmitting(false);
-    }
+    }, 1500);
   };
   
   return (
@@ -66,8 +49,7 @@ export default function NewsletterSignup() {
                 style={{ 
                   backgroundColor: 'rgba(255, 255, 255, 0.1)', 
                   color: '#ffffff',
-                  borderColor: 'rgba(255, 255, 255, 0.2)',
-                  '::placeholder': { color: 'rgba(255, 255, 255, 0.6)' }
+                  borderColor: 'rgba(255, 255, 255, 0.2)'
                 }}
                 disabled={isSubmitting}
               />

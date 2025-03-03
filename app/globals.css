@@ -8,7 +8,47 @@
   }
   
   body {
-    @apply bg-white text-black antialiased;
+    background-color: #ffffff;
+    color: #000000;
+    @apply antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  a {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -16,6 +56,73 @@
   /* Container */
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* Typography */
+  .text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .font-normal {
+    font-weight: 400;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .font-bold {
+    font-weight: 700;
   }
 
   /* Buttons */
@@ -26,19 +133,36 @@
   }
 
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-primary-dark focus:ring-primary;
+    @apply btn bg-primary focus:ring-primary;
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background-color: #b71c1c;
   }
 
   .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-secondary-light focus:ring-secondary;
+    @apply btn bg-secondary focus:ring-secondary;
+    color: #ffffff;
+  }
+  .btn-secondary:hover {
+    background-color: #484848;
   }
 
   .btn-accent {
-    @apply btn bg-accent text-secondary hover:bg-accent-dark focus:ring-accent;
+    @apply btn bg-accent focus:ring-accent;
+    color: #212121;
+  }
+  .btn-accent:hover {
+    background-color: #FFA000;
   }
 
   .btn-outline {
-    @apply btn bg-transparent border-white text-white hover:bg-white/10 focus:ring-white;
+    @apply btn bg-transparent focus:ring-white;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+  .btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   /* Sections */
@@ -51,12 +175,14 @@
   }
 
   .section-subtitle {
-    @apply text-lg text-black/70 mb-8 max-w-3xl mx-auto text-center;
+    @apply text-lg mb-8 max-w-3xl mx-auto text-center;
+    color: rgba(0, 0, 0, 0.7);
   }
 
   /* Cards */
   .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    background-color: #ffffff;
+    @apply rounded-lg shadow-md overflow-hidden;
   }
 
   .card-body {
@@ -69,7 +195,8 @@
 
   /* Fighter Card */
   .fighter-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    background-color: #ffffff;
+    @apply rounded-lg shadow-md overflow-hidden;
   }
 
   .fighter-card img {
@@ -85,16 +212,19 @@
   }
 
   .fighter-card-record {
-    @apply text-sm text-black/50;
+    @apply text-sm;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   /* Event Card */
   .event-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    background-color: #ffffff;
+    @apply rounded-lg shadow-md overflow-hidden;
   }
 
   .event-card-header {
-    @apply p-4 border-b border-black/10;
+    @apply p-4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .event-card-title {
@@ -102,7 +232,8 @@
   }
 
   .event-card-date {
-    @apply text-sm text-black/50;
+    @apply text-sm;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .event-card-body {
@@ -122,16 +253,19 @@
   }
 
   .bout-fighter-record {
-    @apply text-xs text-black/50;
+    @apply text-xs;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .bout-vs {
-    @apply text-xs bg-black/5 px-2 py-1 rounded mx-2;
+    @apply text-xs px-2 py-1 rounded mx-2;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   /* News Card */
   .news-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    background-color: #ffffff;
+    @apply rounded-lg shadow-md overflow-hidden;
   }
 
   .news-card-image {
@@ -139,7 +273,8 @@
   }
 
   .news-card-category {
-    @apply text-xs font-medium text-primary uppercase tracking-wider;
+    @apply text-xs font-medium uppercase tracking-wider;
+    color: #d32f2f;
   }
 
   .news-card-content {
@@ -151,20 +286,24 @@
   }
 
   .news-card-meta {
-    @apply text-sm text-black/50 mb-2;
+    @apply text-sm mb-2;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .news-card-excerpt {
-    @apply text-black/70 line-clamp-3;
+    @apply line-clamp-3;
+    color: rgba(0, 0, 0, 0.7);
   }
 
   /* Video Card */
   .video-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+    background-color: #ffffff;
+    @apply rounded-lg shadow-md overflow-hidden;
   }
 
   .video-card-image {
-    @apply relative h-48 bg-black/10;
+    @apply relative h-48;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .video-thumbnail {
@@ -172,7 +311,8 @@
   }
 
   .video-play-button {
-    @apply w-16 h-16 rounded-full bg-primary/80 flex items-center justify-center;
+    @apply w-16 h-16 rounded-full flex items-center justify-center;
+    background-color: rgba(211, 47, 47, 0.8);
   }
 
   .video-card-content {
@@ -184,7 +324,8 @@
   }
 
   .video-card-meta {
-    @apply text-sm text-black/50 mb-2;
+    @apply text-sm mb-2;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   /* Forms */
@@ -193,15 +334,22 @@
   }
 
   .form-label {
-    @apply block text-sm font-medium text-black/70 mb-1;
+    @apply block text-sm font-medium mb-1;
+    color: rgba(0, 0, 0, 0.7);
   }
 
   .form-input {
-    @apply w-full px-3 py-2 border border-black/20 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary;
+    @apply w-full px-3 py-2 rounded-md shadow-sm focus:outline-none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .form-input:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
   }
 
   .form-error {
-    @apply text-red-500 text-sm mt-1;
+    color: #ef5350;
+    @apply text-sm mt-1;
   }
 
   /* Newsletter */
@@ -210,16 +358,28 @@
   }
 
   .newsletter-input {
-    @apply w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white/20 placeholder-white/60 focus:outline-none focus:border-white;
+    @apply w-full px-4 py-2 rounded-md focus:outline-none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .newsletter-input:focus {
+    border-color: #ffffff;
   }
 
   .newsletter-button {
-    @apply w-full sm:w-auto bg-white text-secondary hover:bg-white/90 py-2 px-4 rounded-md font-medium transition-colors;
+    @apply w-full sm:w-auto py-2 px-4 rounded-md font-medium transition-colors;
+    background-color: #ffffff;
+    color: #212121;
+  }
+  .newsletter-button:hover {
+    background-color: rgba(255, 255, 255, 0.9);
   }
 
   /* Hero Section */
   .hero {
-    @apply bg-secondary py-16 md:py-24 relative;
+    @apply py-16 md:py-24 relative;
+    background-color: #212121;
   }
 
   .hero-content {
@@ -227,11 +387,13 @@
   }
 
   .hero-title {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-6;
+    color: #ffffff;
   }
 
   .hero-subtitle {
-    @apply text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto;
+    @apply text-xl md:text-2xl mb-8 max-w-3xl mx-auto;
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 
@@ -241,7 +403,7 @@
   }
 
   .section-border {
-    @apply border-t border-black/10;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .animate-fade-in {
@@ -269,5 +431,62 @@
 
   .shadow-button {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  /* Text colors */
+  .text-primary {
+    color: #d32f2f;
+  }
+
+  .text-secondary {
+    color: #212121;
+  }
+
+  .text-accent {
+    color: #FFC107;
+  }
+
+  /* Background colors */
+  .bg-primary {
+    background-color: #d32f2f;
+  }
+
+  .bg-secondary {
+    background-color: #212121;
+  }
+
+  .bg-accent {
+    background-color: #FFC107;
+  }
+
+  /* Opacity utilities */
+  .opacity-75 {
+    opacity: 0.75;
+  }
+
+  .opacity-50 {
+    opacity: 0.5;
+  }
+
+  /* Line clamp */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
 } 
